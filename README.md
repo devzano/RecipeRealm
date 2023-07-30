@@ -9,6 +9,9 @@
           <img src="/Screenshots/RecipeRealm(Home).png" alt="RecipeRealm List View" width="300">
         </td>
         <td align="center">
+          <img src="/Screenshots/RecipeRealm(Home2).png" alt="RecipeRealm List View" width="300">
+        </td>
+        <td align="center">
           <img src="/Screenshots/RecipeRealm(New).png" alt="RecipeRealm New Recipe View" width="300">
         </td>
         <td align="center">
