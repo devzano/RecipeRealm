@@ -3,7 +3,7 @@
 <details>
   <summary>Image Gallery</summary>
 
-  <div style="overflow-x: auto; white-space: nowrap; display: flex; justify-content: flex-start;">
+  <div style="overflow-x: auto; white-space: nowrap; display: flex; justify-content: center;">
     <img src="/Screenshots/RecipeRealm(Home).png" alt="RecipeRealm List View" style="width: 300px; height: auto; margin-right: 10px;">
     <img src="/Screenshots/RecipeRealm(New).png" alt="RecipeRealm New Recipe View" style="width: 300px; height: auto; margin-right: 10px;">
     <img src="/Screenshots/RecipeRealm(New2).png" alt="RecipeRealm New Recipe View 2" style="width: 300px; height: auto; margin-right: 10px;">
