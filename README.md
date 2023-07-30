@@ -1,15 +1,22 @@
 <h1 align="center">RecipeRealm</h1>
 
-<!-- Image Gallery Section -->
-<div style="overflow-x: auto; white-space: nowrap;">
-  <img src="/Screenshots/RecipeRealm(Home).png" alt="RecipeRealm List View" style="width: 300px; height: auto; margin-right: 10px;">
-  <img src="/Screenshots/RecipeRealm(New).png" alt="RecipeRealm New Recipe View" style="width: 300px; height: auto; margin-right: 10px;">
-  <img src="/Screenshots/RecipeRealm(New2).png" alt="RecipeRealm New Recipe View 2" style="width: 300px; height: auto; margin-right: 10px;">
-  <img src="/Screenshots/RecipeRealm(Detail).png.png" alt="RecipeRealm Test Detail View" style="width: 300px; height: auto; margin-right: 10px;">
-  <img src="/Screenshots/RecipeRealm(DetailEdit).png.png" alt="RecipeRealm Test Edit Detail View" style="width: 300px; height: auto; margin-right: 10px;">
-  <img src="/Screenshots/RecipeRealm(Detail1).png.png" alt="RecipeRealm Detail View" style="width: 300px; height: auto; margin-right: 10px;">
-  <img src="/Screenshots/RecipeRealm(Detail2).png.png" alt="RecipeRealm Detail View" style="width: 300px; height: auto; margin-right: 10px;">
-</div>
+<details>
+  <summary>Image Gallery</summary>
+
+  <!-- Image Gallery Section -->
+  <div style="overflow-x: auto; white-space: nowrap; display: flex; justify-content: flex-start;">
+    <img src="images/RecipeRealm(Home).png" alt="RecipeRealm List View" style="width: 300px; height: auto; margin-right: 10px;">
+    <img src="images/RecipeRealm(New).png" alt="RecipeRealm New Recipe View" style="width: 300px; height: auto; margin-right: 10px;">
+    <img src="images/RecipeRealm(New2).png" alt="RecipeRealm New Recipe View 2" style="width: 300px; height: auto; margin-right: 10px;">
+    <img src="images/RecipeRealm(Detail).png.png" alt="RecipeRealm Test Detail View" style="width: 300px; height: auto; margin-right: 10px;">
+    <img src="images/RecipeRealm(DetailEdit).png.png" alt="RecipeRealm Test Edit Detail View" style="width: 300px; height: auto; margin-right: 10px;">
+    <img src="images/RecipeRealm(Detail1).png.png" alt="RecipeRealm Detail View" style="width: 300px; height: auto; margin-right: 10px;">
+    <img src="images/RecipeRealm(Detail2).png.png" alt="RecipeRealm Detail View" style="width: 300px; height: auto; margin-right: 10px;">
+  </div>
+  <button onclick="showNextImage()" style="margin-left: 10px;">Next</button>
+
+</details>
+
 
 
 <!-- ![RecipeRealm List View](/Screenshots/RecipeRealm(Home).png)
