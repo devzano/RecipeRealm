@@ -4,13 +4,13 @@
   <summary>Image Gallery</summary>
 
   <div style="overflow-x: auto; white-space: nowrap; display: flex; justify-content: center;">
-    <img src="/Screenshots/RecipeRealm(Home).png" alt="RecipeRealm List View" style="width: 300px; height: auto; margin-right: 10px;">
-    <img src="/Screenshots/RecipeRealm(New).png" alt="RecipeRealm New Recipe View" style="width: 300px; height: auto; margin-right: 10px;">
-    <img src="/Screenshots/RecipeRealm(New2).png" alt="RecipeRealm New Recipe View 2" style="width: 300px; height: auto; margin-right: 10px;">
-    <img src="/Screenshots/RecipeRealm(Detail).png" alt="RecipeRealm Test Detail View" style="width: 300px; height: auto; margin-right: 10px;">
-    <img src="/Screenshots/RecipeRealm(DetailEdit).png" alt="RecipeRealm Test Edit Detail View" style="width: 300px; height: auto; margin-right: 10px;">
-    <img src="/Screenshots/RecipeRealm(Detail1).png" alt="RecipeRealm Detail View" style="width: 300px; height: auto; margin-right: 10px;">
-    <img src="/Screenshots/RecipeRealm(Detail2).png" alt="RecipeRealm Detail View" style="width: 300px; height: auto; margin-right: 10px;">
+    <img src="/Screenshots/RecipeRealm(Home).png" alt="RecipeRealm List View" style="width: 300px; height: auto;">
+    <img src="/Screenshots/RecipeRealm(New).png" alt="RecipeRealm New Recipe View" style="width: 300px; height: auto;">
+    <img src="/Screenshots/RecipeRealm(New2).png" alt="RecipeRealm New Recipe View 2" style="width: 300px; height: auto;">
+    <img src="/Screenshots/RecipeRealm(Detail).png" alt="RecipeRealm Test Detail View" style="width: 300px; height: auto;">
+    <img src="/Screenshots/RecipeRealm(DetailEdit).png" alt="RecipeRealm Test Edit Detail View" style="width: 300px; height: auto;">
+    <img src="/Screenshots/RecipeRealm(Detail1).png" alt="RecipeRealm Detail View" style="width: 300px; height: auto;">
+    <img src="/Screenshots/RecipeRealm(Detail2).png" alt="RecipeRealm Detail View" style="width: 300px; height: auto;">
   </div>
 
 </details>
