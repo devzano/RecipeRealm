@@ -25,8 +25,6 @@
         <td align="center">
           <img src="/Screenshots/RecipeRealm(Detail1).png" alt="RecipeRealm Detail 1 View" width="300">
         </td>
-      </tr>
-      <tr>
         <td align="center" colspan="3">
           <img src="/Screenshots/RecipeRealm(Detail2).png" alt="RecipeRealm Detail 2 View" width="300">
         </td>
