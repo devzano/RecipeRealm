@@ -6,30 +6,30 @@
     <table>
       <tr>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm(Home).png" alt="RecipeRealm List View" width="300">
+          <img src="/Screenshots/RecipeRealm (Home).png" alt="RecipeRealm List View" width="300">
         </td>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm(Home2).png" alt="RecipeRealm List View" width="300">
+          <img src="/Screenshots/RecipeRealm (Home2).png" alt="RecipeRealm List View" width="300">
         </td>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm(New).png" alt="RecipeRealm New Recipe View" width="300">
+          <img src="/Screenshots/RecipeRealm (New).png" alt="RecipeRealm New Recipe View" width="300">
         </td>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm(New2).png" alt="RecipeRealm New Recipe View 2" width="300">
+          <img src="/Screenshots/RecipeRealm (New2).png" alt="RecipeRealm New Recipe View 2" width="300">
         </td>
       </tr>
       <tr>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm(Detail).png" alt="RecipeRealm Test Detail View" width="300">
+          <img src="/Screenshots/RecipeRealm (Detail).png" alt="RecipeRealm Test Detail View" width="300">
         </td>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm(DetailEdit).png" alt="RecipeRealm Test Edit Detail View" width="300">
+          <img src="/Screenshots/RecipeRealm (DetailEdit).png" alt="RecipeRealm Test Edit Detail View" width="300">
         </td>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm(Detail1).png" alt="RecipeRealm Detail 1 View" width="300">
+          <img src="/Screenshots/RecipeRealm (Detail1).png" alt="RecipeRealm Detail 1 View" width="300">
         </td>
         <td align="center" colspan="3">
-          <img src="/Screenshots/RecipeRealm(Detail2).png" alt="RecipeRealm Detail 2 View" width="300">
+          <img src="/Screenshots/RecipeRealm (Detail2).png" alt="RecipeRealm Detail 2 View" width="300">
         </td>
       </tr>
     </table>
