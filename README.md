@@ -1,19 +1,13 @@
 <h1 align="center">RecipeRealm</h1>
 
-<details>
-  <summary>Image Gallery</summary>
+<img src="/Screenshots/RecipeRealm(Home).png" width="300" alt="RecipeRealm List View">
+<img src="/Screenshots/RecipeRealm(New).png" width="300" alt="RecipeRealm New Recipe View">
+<img src="/Screenshots/RecipeRealm(New2).png" width="300" alt="RecipeRealm New Recipe View 2">
+<img src="/Screenshots/RecipeRealm(Detail).png" width="300" alt="RecipeRealm Test Detail View">
+<img src="/Screenshots/RecipeRealm(DetailEdit).png" width="300" alt="RecipeRealm Test Edit Detail View">
+<img src="/Screenshots/RecipeRealm(Detail1).png" width="300" alt="RecipeRealm Detail View">
+<img src="/Screenshots/RecipeRealm(Detail2).png" width="300" alt="RecipeRealm Detail View">
 
-  <div style="overflow-x: auto; white-space: nowrap; display: flex; justify-content: center;">
-    <img src="/Screenshots/RecipeRealm(Home).png" alt="RecipeRealm List View" style="width: 300px; height: auto;">
-    <img src="/Screenshots/RecipeRealm(New).png" alt="RecipeRealm New Recipe View" style="width: 300px; height: auto;">
-    <img src="/Screenshots/RecipeRealm(New2).png" alt="RecipeRealm New Recipe View 2" style="width: 300px; height: auto;">
-    <img src="/Screenshots/RecipeRealm(Detail).png" alt="RecipeRealm Test Detail View" style="width: 300px; height: auto;">
-    <img src="/Screenshots/RecipeRealm(DetailEdit).png" alt="RecipeRealm Test Edit Detail View" style="width: 300px; height: auto;">
-    <img src="/Screenshots/RecipeRealm(Detail1).png" alt="RecipeRealm Detail View" style="width: 300px; height: auto;">
-    <img src="/Screenshots/RecipeRealm(Detail2).png" alt="RecipeRealm Detail View" style="width: 300px; height: auto;">
-  </div>
-
-</details>
 
 RecipeRealm is an iOS app for creating and managing your favorite recipes. It allows you to create, view, and edit recipes, complete them with images, ingredients, and step-by-step instructions. RecipeRealm uses Core Data for data storage and SwiftUI for the user interface.
 
