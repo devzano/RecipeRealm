@@ -1,19 +1,33 @@
 <h1 align="center">RecipeRealm</h1>
 
-<details>
-  <summary>Image Gallery</summary>
+<style>
+  .centered {
+    display: flex;
+    justify-content: center;
+  }
 
-  Click on the image titles to view the images:
+  .gallery-container {
+    max-width: 300px;
+  }
+</style>
 
-  * [RecipeRealm List View](/Screenshots/RecipeRealm(Home).png)
-  * [RecipeRealm New Recipe View](/Screenshots/RecipeRealm(New).png)
-  * [RecipeRealm New Recipe View 2](/Screenshots/RecipeRealm(New2).png)
-  * [RecipeRealm Test Detail View](/Screenshots/RecipeRealm(Detail).png)
-  * [RecipeRealm Test Edit Detail View](/Screenshots/RecipeRealm(DetailEdit).png)
-  * [RecipeRealm Detail 1 View](/Screenshots/RecipeRealm(Detail1).png)
-  * [RecipeRealm Detail 2 View](/Screenshots/RecipeRealm(Detail2).png)
+<details class="centered">
+  <summary>App Gallery</summary>
 
+  <div class="gallery-container">
+    Click on the image title to view the image:
+    <p>
+      <img src="/Screenshots/RecipeRealm(Home).png" alt="RecipeRealm List View" width="300">
+      <img src="/Screenshots/RecipeRealm(New).png" alt="RecipeRealm New Recipe View" width="300">
+      <img src="/Screenshots/RecipeRealm(New2).png" alt="RecipeRealm New Recipe View 2" width="300">
+      <img src="/Screenshots/RecipeRealm(Detail).png" alt="RecipeRealm Test Detail View" width="300">
+      <img src="/Screenshots/RecipeRealm(DetailEdit).png" alt="RecipeRealm Test Edit Detail View" width="300">
+      <img src="/Screenshots/RecipeRealm(Detail1).png" alt="RecipeRealm Detail 1 View" width="300">
+      <img src="/Screenshots/RecipeRealm(Detail2).png" alt="RecipeRealm Detail 2 View" width="300">
+    </p>
+  </div>
 </details>
+
 
 
 
