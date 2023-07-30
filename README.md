@@ -1,5 +1,6 @@
 <h1 align="center">RecipeRealm</h1>
 
+<div style="display: flex; justify-content: center;">
 <img src="/Screenshots/RecipeRealm(Home).png" width="300" alt="RecipeRealm List View">
 <img src="/Screenshots/RecipeRealm(New).png" width="300" alt="RecipeRealm New Recipe View">
 <img src="/Screenshots/RecipeRealm(New2).png" width="300" alt="RecipeRealm New Recipe View 2">
@@ -7,7 +8,7 @@
 <img src="/Screenshots/RecipeRealm(DetailEdit).png" width="300" alt="RecipeRealm Test Edit Detail View">
 <img src="/Screenshots/RecipeRealm(Detail1).png" width="300" alt="RecipeRealm Detail View">
 <img src="/Screenshots/RecipeRealm(Detail2).png" width="300" alt="RecipeRealm Detail View">
-
+</div>
 
 RecipeRealm is an iOS app for creating and managing your favorite recipes. It allows you to create, view, and edit recipes, complete them with images, ingredients, and step-by-step instructions. RecipeRealm uses Core Data for data storage and SwiftUI for the user interface.
 
