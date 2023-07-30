@@ -1,5 +1,6 @@
 <h1 align="center">RecipeRealm</h1>
-![RecipeRealm List View](/devzano/RecipeRealm/Screenshots/RecipeRealm(Home).png)
+
+![RecipeRealm List View](/Screenshots/RecipeRealm(Home).png)
 ![RecipeRealm New Recipe View](/devzano/RecipeRealm/Screenshots/RecipeRealm(New).png)
 ![RecipeRealm New Recipe View 2](/devzano/RecipeRealm/Screenshots/RecipeRealm(New2).png)
 ![RecipeRealm Test Detail View](/devzano/RecipeRealm/Screenshots/RecipeRealm(Detail).png.png)
