@@ -5,13 +5,13 @@
 
   Click on the image titles to view the images:
 
-  * [RecipeRealm List View](/devzano/RecipeRealm/Screenshots/RecipeRealm(Home).png)
-  * [RecipeRealm New Recipe View](/devzano/RecipeRealm/Screenshots/RecipeRealm(New).png)
-  * [RecipeRealm New Recipe View 2](/devzano/RecipeRealm/Screenshots/RecipeRealm(New2).png)
-  * [RecipeRealm Test Detail View](/devzano/RecipeRealm/Screenshots/RecipeRealm(Detail).png)
-  * [RecipeRealm Test Edit Detail View](/devzano/RecipeRealm/Screenshots/RecipeRealm(DetailEdit).png)
-  * [RecipeRealm Detail 1 View](/devzano/RecipeRealm/Screenshots/RecipeRealm(Detail1).png)
-  * [RecipeRealm Detail 2 View](/devzano/RecipeRealm/Screenshots/RecipeRealm(Detail2).png)
+  * [RecipeRealm List View](/Screenshots/RecipeRealm(Home).png)
+  * [RecipeRealm New Recipe View](/Screenshots/RecipeRealm(New).png)
+  * [RecipeRealm New Recipe View 2](/Screenshots/RecipeRealm(New2).png)
+  * [RecipeRealm Test Detail View](/Screenshots/RecipeRealm(Detail).png)
+  * [RecipeRealm Test Edit Detail View](/Screenshots/RecipeRealm(DetailEdit).png)
+  * [RecipeRealm Detail 1 View](/Screenshots/RecipeRealm(Detail1).png)
+  * [RecipeRealm Detail 2 View](/Screenshots/RecipeRealm(Detail2).png)
 
 </details>
 
