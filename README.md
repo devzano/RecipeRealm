@@ -1,14 +1,20 @@
 <h1 align="center">RecipeRealm</h1>
 
-<p align="center">
-  <img src="/Screenshots/RecipeRealm(Home).png" width="300" alt="RecipeRealm List View">
-  <img src="/Screenshots/RecipeRealm(New).png" width="300" alt="RecipeRealm New Recipe View">
-  <img src="/Screenshots/RecipeRealm(New2).png" width="300" alt="RecipeRealm New Recipe View 2">
-  <img src="/Screenshots/RecipeRealm(Detail).png" width="300" alt="RecipeRealm Test Detail View">
-  <img src="/Screenshots/RecipeRealm(DetailEdit).png" width="300" alt="RecipeRealm Test Edit Detail View">
-  <img src="/Screenshots/RecipeRealm(Detail1).png" width="300" alt="RecipeRealm Detail View">
-  <img src="/Screenshots/RecipeRealm(Detail2).png" width="300" alt="RecipeRealm Detail View">
-</p>
+<details>
+  <summary>Image Gallery</summary>
+
+  Click on the image titles to view the images:
+
+  * [RecipeRealm List View](/devzano/RecipeRealm/Screenshots/RecipeRealm(Home).png)
+  * [RecipeRealm New Recipe View](/devzano/RecipeRealm/Screenshots/RecipeRealm(New).png)
+  * [RecipeRealm New Recipe View 2](/devzano/RecipeRealm/Screenshots/RecipeRealm(New2).png)
+  * [RecipeRealm Test Detail View](/devzano/RecipeRealm/Screenshots/RecipeRealm(Detail).png)
+  * [RecipeRealm Test Edit Detail View](/devzano/RecipeRealm/Screenshots/RecipeRealm(DetailEdit).png)
+  * [RecipeRealm Detail 1 View](/devzano/RecipeRealm/Screenshots/RecipeRealm(Detail1).png)
+  * [RecipeRealm Detail 2 View](/devzano/RecipeRealm/Screenshots/RecipeRealm(Detail2).png)
+
+</details>
+
 
 
 RecipeRealm is an iOS app for creating and managing your favorite recipes. It allows you to create, view, and edit recipes, complete them with images, ingredients, and step-by-step instructions. RecipeRealm uses Core Data for data storage and SwiftUI for the user interface.
