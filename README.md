@@ -56,4 +56,4 @@ Contributions to RecipeRealm are welcome! If you have any feature suggestions, b
 Copyright © 2023 devzano. All rights reserved.
 
 ##### Credits
-<small>Nutrition Badges <a href="http://www.freepik.com">Designed by Photoroyalty / Freepik</a></small>
+<small>Nutrition Badges <a href="http://www.freepik.com">Designed by Photoroyalty/Freepik</a></small>
