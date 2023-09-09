@@ -36,7 +36,7 @@
   </p>
 </details>
 
-RecipeRealm is your culinary companion, offering a world of flavors at your fingertips. Create, store a diverse range of recipes, complete them with images, prep/cook times, ingredients, and detailed steps. Edit recipes for a whole new view to save. Explore new culinary horizons with the in-app browser by tapping the Google logo to search for recipes, can also quickly capture a ingredient list view from web pages with the ease of a button. Easily find them through the search bar (filter your text by title, recipes time or cuisine). Tailor your culinary adventure to dietary needs with badges. Discover RecipeRealm's features, which includes a default recipe, a list/grid view, customizable app tint, recipe/image search, sharing/importing, and step-by-step tracking. Elevate your cooking journey with RecipeRealm today!
+RecipeRealm is your culinary companion, offering a world of flavors at your fingertips. Create and store a diverse range of recipes, complete them with images, prep/cook times, ingredients, and detailed steps. Edit recipes for a whole new view to save. Explore new culinary horizons with the in-app browser by tapping the Google logo to search for recipes, can also quickly capture a ingredient list view from web pages with the ease of a button. Easily find your recipes through the search bar (filter your text by title, times or cuisine). Tailor your culinary adventure to dietary needs with badges. Discover RecipeRealm's features, which includes a default recipe, a list/grid view, customizable app tint, recipe/image search, sharing/importing, and step-by-step tracking. Elevate your cooking journey with RecipeRealm today!
 
 ### Built With
 * xCode
@@ -61,5 +61,6 @@ Contributions to RecipeRealm are welcome! If you have any feature suggestions, b
 Copyright © 2023 devzano. All rights reserved.
 
 ##### Credits
-<small>Nutrition Badges <a href="http://www.freepik.com">Designed by Photoroyalty/Freepik</a></small>
 <small><a href="http://www.google.com">Google</a></small>
+<br>
+<small>Nutrition Badges <a href="http://www.freepik.com">Designed by Photoroyalty/Freepik</a></small>
