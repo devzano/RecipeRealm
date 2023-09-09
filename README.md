@@ -12,31 +12,31 @@
           <img src="/Screenshots/RecipeRealm (Home2).png" alt="RecipeRealm List View" width="300">
         </td>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm (New).png" alt="RecipeRealm New Recipe View" width="300">
+          <img src="/Screenshots/RecipeRealm (Home/Share).png" alt="RecipeRealm New Recipe View" width="300">
         </td>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm (New2).png" alt="RecipeRealm New Recipe View 2" width="300">
+          <img src="/Screenshots/RecipeRealm (New).png" alt="RecipeRealm New Recipe View 2" width="300">
         </td>
       </tr>
       <tr>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm (Detail).png" alt="RecipeRealm Test Detail View" width="300">
+          <img src="/Screenshots/RecipeRealm (New2).png" alt="RecipeRealm Test Detail View" width="300">
         </td>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm (DetailEdit).png" alt="RecipeRealm Test Edit Detail View" width="300">
+          <img src="/Screenshots/RecipeRealm (Detail).png" alt="RecipeRealm Detail View" width="300">
         </td>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm (Detail1).png" alt="RecipeRealm Detail 1 View" width="300">
+          <img src="/Screenshots/RecipeRealm (Detail2).png" alt="RecipeRealm Detail 2 View" width="300">
         </td>
         <td align="center" colspan="3">
-          <img src="/Screenshots/RecipeRealm (Detail2).png" alt="RecipeRealm Detail 2 View" width="300">
+          <img src="/Screenshots/RecipeRealm (Edit).png" alt="RecipeRealm Edit View" width="300">
         </td>
       </tr>
     </table>
   </p>
 </details>
 
-RecipeRealm is an iOS app for creating and managing your favorite recipes. It allows you to create, view, and edit recipes, complete them with images, ingredients, and step-by-step instructions. RecipeRealm uses Core Data for data storage and SwiftUI for the user interface.
+RecipeRealm is your culinary companion, offering a world of flavors at your fingertips. Create, store a diverse range of recipes, complete them with images, prep/cook times, ingredients, and detailed steps. Edit recipes for a whole new view to save. Explore new culinary horizons with the in-app browser by tapping the Google logo to search for recipes, can also quickly capture a ingredient list view from web pages with the ease of a button. Easily find them through the search bar (filter your text by title, recipes time or cuisine). Tailor your culinary adventure to dietary needs with badges. Discover RecipeRealm's features, which includes a default recipe, a list/grid view, customizable app tint, recipe/image search, sharing/importing, and step-by-step tracking. Elevate your cooking journey with RecipeRealm today!
 
 ### Built With
 * xCode
@@ -44,9 +44,14 @@ RecipeRealm is an iOS app for creating and managing your favorite recipes. It al
 * CoreData
 
 ### Features
+* __Recipes__ can be viewed in a list or grid.
+* __Tint__ color changeable.
+* __Share__ recipes with a short hold.
+* __Import__ from clipboard.
 * __Search__ for recipes by title, cuisine, prep time and/or cook time.
 * __Add__ new recipes with ingredients, steps and any extra notes.
-* __Upload__ an image from your photo library or paste an image URL.
+* __Mark__ off ingredients and steps.
+* __Upload__ an image from your photo library or search an image with Google.
 * __Google__ search directly from the app to find recipes.
 
 ### Contributions
@@ -57,3 +62,4 @@ Copyright © 2023 devzano. All rights reserved.
 
 ##### Credits
 <small>Nutrition Badges <a href="http://www.freepik.com">Designed by Photoroyalty/Freepik</a></small>
+<small><a href="http://www.google.com">Google</a></small>
