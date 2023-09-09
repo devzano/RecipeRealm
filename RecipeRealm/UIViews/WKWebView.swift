@@ -1,94 +1,9 @@
 //
-//  SarfariView+WKWebView.swift
+//  WKWebView.swift
 //  RecipeRealm
 //
 //  Created by Ruben Manzano on 7/20/23.
 //
-
-// MARK: - iOS SafariView
-
-//struct SafariView: UIViewControllerRepresentable {
-//    let url: URL
-//    
-//    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) { }
-//    
-//    func makeUIViewController(context: Context) -> SFSafariViewController {
-//        let safariVC = SFSafariViewController(url: self.url)
-//        return safariVC
-//    }
-//}
-
-// MARK: - WKWebView w/ (dismiss & back button)
-
-//struct WebView: UIViewRepresentable {
-//    let request: URLRequest
-//
-//    func makeUIView(context: Context) -> WKWebView  {
-//        let webView = WKWebView()
-//        webView.load(request)
-//        return webView
-//    }
-//
-//    func updateUIView(_ uiView: WKWebView, context: Context) {}
-//}
-
-//struct WebViewControllerRepresentable: UIViewControllerRepresentable {
-//    let request: URLRequest
-//
-//    func makeUIViewController(context: Context) -> UINavigationController {
-//        let viewController = WebViewController()
-//        viewController.request = request
-//        return UINavigationController(rootViewController: viewController)
-//    }
-//
-//    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
-//        (uiViewController.viewControllers.first as? WebViewController)?.request = request
-//    }
-//}
-//
-//class WebViewController: UIViewController, WKNavigationDelegate {
-//    var request: URLRequest? {
-//        didSet {
-//            if let request = request {
-//                webView.load(request)
-//            }
-//        }
-//    }
-//
-//    private lazy var webView: WKWebView = {
-//        let webView = WKWebView()
-//        webView.navigationDelegate = self
-//        webView.translatesAutoresizingMaskIntoConstraints = false
-//        return webView
-//    }()
-//
-//
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Dismiss", style: .plain, target: self, action: #selector(dismissSelf))
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(goBack))
-//
-//        view.addSubview(webView)
-//        NSLayoutConstraint.activate([
-//            webView.topAnchor.constraint(equalTo: view.topAnchor),
-//            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-//        ])
-//    }
-//
-//    @objc private func dismissSelf() {
-//        dismiss(animated: true, completion: nil)
-//    }
-//
-//    @objc private func goBack() {
-//        if webView.canGoBack {
-//            webView.goBack()
-//        }
-//    }
-//}
 
 import SwiftUI
 import WebKit
@@ -125,7 +40,7 @@ class WebViewWithButton: UIView, WKNavigationDelegate {
     private var cancellables: Set<AnyCancellable> = []
     private var isLoadingPage: Bool = false {
         didSet {
-            scanTextButton.isEnabled = !isLoadingPage
+            scanTextButton!.isEnabled = !isLoadingPage
         }
     }
 
@@ -163,7 +78,7 @@ class WebViewWithButton: UIView, WKNavigationDelegate {
         return label
     }()
     
-    private lazy var scanTextButton: UIButton = {
+    lazy var scanTextButton: UIButton? = {
         UIButton(imageSystemName: "text.viewfinder", target: self, action: #selector(scanText))
     }()
     
@@ -171,18 +86,18 @@ class WebViewWithButton: UIView, WKNavigationDelegate {
         UIButton(imageSystemName: "arrowshape.turn.up.backward.2.circle", target: self, action: #selector(goBack))
     }()
     
-    private lazy var dismissButton: UIButton = {
+    lazy var dismissButton: UIButton? = {
         UIButton(imageSystemName: "xmark.square", target: self, action: #selector(dismissWebView))
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(dismissButton)
+        addSubview(dismissButton!)
         addSubview(backButton)
         addSubview(webView)
         webURLAndScanButtonStackView.addArrangedSubview(webURL)
-        webURLAndScanButtonStackView.addArrangedSubview(scanTextButton)
+        webURLAndScanButtonStackView.addArrangedSubview(scanTextButton!)
         addSubview(webURLAndScanButtonStackView)
         
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(copyURL))
@@ -190,8 +105,8 @@ class WebViewWithButton: UIView, WKNavigationDelegate {
         webURL.isUserInteractionEnabled = true
         
         NSLayoutConstraint.activate([
-            dismissButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-            dismissButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            dismissButton!.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+            dismissButton!.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
             backButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
             backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -205,7 +120,7 @@ class WebViewWithButton: UIView, WKNavigationDelegate {
             webURLAndScanButtonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             webURLAndScanButtonStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             
-            scanTextButton.widthAnchor.constraint(equalToConstant: 44),
+            scanTextButton!.widthAnchor.constraint(equalToConstant: 44),
         ])
         
         observation = webView.publisher(for: \.canGoBack)
@@ -222,7 +137,7 @@ class WebViewWithButton: UIView, WKNavigationDelegate {
         
         setupWebViewObservations()
         webView.navigationDelegate = self
-        scanTextButton.isEnabled = false
+        scanTextButton!.isEnabled = false
     }
     
     func setupWebViewObservations() {
@@ -258,22 +173,22 @@ class WebViewWithButton: UIView, WKNavigationDelegate {
     // MARK: - Scanning
 
     @objc private func scanText() {
-        scanTextButton.isEnabled = false
+        scanTextButton!.isEnabled = false
         executeJavascript(script: scanScript) { [weak self] result in
             defer {
-                self?.scanTextButton.isEnabled = true
+                self?.scanTextButton!.isEnabled = true
             }
             
             switch result {
-                case .success(let text):
-                    let parsedResults = self?.parseText(text) ?? []
-                    if parsedResults.isEmpty {
-                        let errorMessage = "No keywords found on the webpage."
-                        self?.presentErrorViewController(message: errorMessage)
-                    } else {
-                        let scannedTextViewController = ScannedTextViewController(text: parsedResults.map { $0.extractedText }.joined())
-                        self?.parentViewController?.present(scannedTextViewController, animated: true, completion: nil)
-                    }
+            case .success(let combinedText):
+                let parsedResults = self?.parseText(combinedText) ?? []
+                if parsedResults.isEmpty {
+                    let errorMessage = "No keywords found on the webpage."
+                    self?.presentErrorViewController(message: errorMessage)
+                } else {
+                    let scannedTextViewController = ScannedTextViewController(text: parsedResults.map { $0.extractedText }.joined())
+                    self?.parentViewController?.present(scannedTextViewController, animated: true, completion: nil)
+                }
                 
             case .failure(let error):
                 print("Error: \(error)")
@@ -284,50 +199,38 @@ class WebViewWithButton: UIView, WKNavigationDelegate {
     }
 
     private let scanScript = """
-        function getTextFromArticle() {
-            var articles = document.getElementsByTagName('article');
-            var text = '';
-            var ingredientsSet = new Set();
-            for (var i = 0; i < articles.length; i++) {
-                var ingredientClasses = articles[i].querySelectorAll("[class*='ingredient']");
-                for (var j = 0; j < ingredientClasses.length; j++) {
-                    var ingredients = ingredientClasses[j].innerText.split("\\n");
-                    for (var k = 0; k < ingredients.length; k++) {
-                        ingredientsSet.add(ingredients[k].trim());
-                    }
-                }
+        function extractFirstListFromElements(selector) {
+            var elements = document.querySelectorAll(selector);
+            if (elements.length > 0) {
+                var items = elements[0].innerText.split("\\n");
+                return items.join("\\n");
             }
-            text = Array.from(ingredientsSet).join("\\n");
-            return text;
+            return '';
         }
-        getTextFromArticle();
+
+        var ingredients = extractFirstListFromElements("[class*='ingredient'], [class*='ingr']");
+        var steps = extractFirstListFromElements("[class*='step']");
+        var instructions = extractFirstListFromElements("[class*='instruction']");
+        var directions = extractFirstListFromElements("[class*='direction'], [class*='dir']");
+        ingredients + '|~|' + steps + '|~|' + instructions + '|~|' + directions;
     """
 
     // MARK: - Parsing and Filtering
 
-    private func parseText(_ text: String) -> [(keyword: String, extractedText: String)] {
-        let keywords = ["ingredients", "instructions", "nutrition"]
+    private func parseText(_ combinedText: String) -> [(keyword: String, extractedText: String)] {
+        let keywords = ["ingredients", "steps", "instructions", "directions"]
+        let extractedTexts = combinedText.components(separatedBy: "|~|")
         var parsedText: [(keyword: String, extractedText: String)] = []
 
-        for keyword in keywords {
-            if let range = text.range(of: keyword, options: .caseInsensitive) {
-                let restOfText = text[range.upperBound...]
-                parsedText.append((keyword: keyword, extractedText: "Here's the \(keyword) list: \(restOfText)\n\n"))
+        for (index, keyword) in keywords.enumerated() {
+            let extractedText = index < extractedTexts.count ? extractedTexts[index] : ""
+            if !extractedText.isEmpty {
+                parsedText.append((keyword: keyword, extractedText: "Here's the \(keyword) list:\n\(extractedText)\n\n"))
             } else {
-                parsedText.append((keyword: keyword, extractedText: "The word '\(keyword)' was NOT found on the webpage.\n\n"))
+                parsedText.append((keyword: keyword, extractedText: "The \(keyword) list was NOT found on the webpage.\n\n"))
             }
         }
         return parsedText
-    }
-
-    private func filterText(_ textSections: [String]) -> String {
-        let irrelevantKeywords = ["reply", "comment", "share", "like", "post"]
-        let filteredLines = textSections.flatMap { $0.split(separator: "\n") }.filter { line in
-            let lowercasedLine = line.lowercased()
-            return !irrelevantKeywords.contains(where: lowercasedLine.contains) &&
-                line.count > 10 && line.count < 200 && line.rangeOfCharacter(from: .decimalDigits) != nil
-        }
-        return filteredLines.joined(separator: "\n")
     }
 
     // MARK: - Error Handling
@@ -380,17 +283,32 @@ class WebViewWithButton: UIView, WKNavigationDelegate {
 
 struct WebViewWithButtonRepresentable: UIViewRepresentable {
     let request: URLRequest
+    let showScanButton: Bool
+    let showCloseButton: Bool
 
     func makeUIView(context: Context) -> WebViewWithButton {
         let view = WebViewWithButton()
         view.request = request
+        if !showScanButton {
+            view.scanTextButton?.isHidden = true
+        }
+        if !showCloseButton {
+            view.dismissButton?.isHidden = true
+        }
         return view
     }
 
     func updateUIView(_ uiView: WebViewWithButton, context: Context) {
         uiView.request = request
+        if !showScanButton {
+            uiView.scanTextButton?.isHidden = true
+        }
+        if !showCloseButton {
+            uiView.dismissButton?.isHidden = true
+        }
     }
 }
+
 
 class ScannedTextViewController: UIViewController {
     private let textView = UITextView()

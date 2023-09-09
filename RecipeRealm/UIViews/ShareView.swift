@@ -6,32 +6,71 @@
 //
 
 import SwiftUI
-import CoreData
 import UIKit
-import SafariServices
 
+// MARK: DeepLink Generation
+func generateRecipeDeepLink(recipe: Recipe) -> URL? {
+    var components = URLComponents()
+    components.scheme = "RecipeRealm"
+    components.host = "app"
+    components.path = "/recipe"
+    
+    let recipeProperties: [String: String] = [
+        "id": recipe.id ?? "",
+        "title": recipe.title ?? "",
+        "preptime": recipe.prepTime ?? "",
+        "cooktime": recipe.cookTime ?? "",
+        "cuisine": recipe.cuisines ?? "",
+        "ingredients": recipe.ingredients ?? "",
+        "steps": recipe.steps ?? "",
+        "notes": recipe.notes ?? "",
+        "url": recipe.recipeURL ?? ""
+    ]
+    
+    components.queryItems = recipeProperties.map {
+        URLQueryItem(name: $0.key, value: $0.value)
+    }
+    
+    return components.url
+}
+
+func deepShareRecipe(recipe: Recipe) {
+    guard let deepLinkURL = generateRecipeDeepLink(recipe: recipe) else { return }
+    let activityViewController = UIActivityViewController(activityItems: [deepLinkURL], applicationActivities: nil)
+    if let keyWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+       let rootViewController = keyWindowScene.windows.first?.rootViewController {
+        rootViewController.present(activityViewController, animated: true, completion: nil)
+    }
+}
+
+// MARK: Share Recipe
 func shareRecipe(recipe: Recipe) {
-    let title = (recipe.title?.isEmpty ?? true) ? "Untitled Recipe" : recipe.title
-    let cuisines = (recipe.cuisines?.isEmpty ?? true) ? "N/A" : recipe.cuisines
-    let prepTime = (recipe.prepTime?.isEmpty ?? true) ? "N/A" : recipe.prepTime
-    let cookTime = (recipe.cookTime?.isEmpty ?? true) ? "N/A" : recipe.cookTime
-    let ingredients = (recipe.ingredients?.isEmpty ?? true) ? "No ingredients provided" : recipe.ingredients
-    let steps = (recipe.steps?.isEmpty ?? true) ? "No steps provided" : recipe.steps
-    let notes = (recipe.notes?.isEmpty ?? true) ? "No notes available" : recipe.notes
+    let title = recipe.title ?? ""
+    let cuisines = recipe.cuisines ?? ""
+    let prepTime = recipe.prepTime ?? ""
+    let cookTime = recipe.cookTime ?? ""
+    let ingredients = recipe.ingredients ?? ""
+    let steps = recipe.steps ?? ""
+    let notes = recipe.notes ?? ""
+    let url = recipe.recipeURL ?? ""
+    
     var shareText = """
-    Recipe: \(title ?? "")
-    Cuisine: \(cuisines ?? "")
-    Prep Time: \(prepTime ?? "")
-    Cook Time: \(cookTime ?? "")
+    Title: \(title)
+    Cuisine: \(cuisines)
+    Prep Time: \(prepTime)
+    Cook Time: \(cookTime)
     
     Ingredients:
-    \(ingredients ?? "")
+    \(ingredients)
     
     Steps:
-    \(steps ?? "")
+    \(steps)
     
     Notes:
-    \(notes ?? "")
+    \(notes)
+    
+    URL:
+    \(url)
     
     """
     
@@ -43,68 +82,50 @@ func shareRecipe(recipe: Recipe) {
         ("Organic", recipe.organic),
         ("Vegetarian", recipe.vegetarian)
     ]
+    
     for (nutritionBadgeName, nutritionBadgeSelected) in nutritionBadgeNames {
-        shareText += "\n\(nutritionBadgeName): \(nutritionBadgeSelected ? "Yes" : "No")"
+        let badgeStatus = nutritionBadgeSelected ? "Yes" : "No"
+        shareText += "\n\(nutritionBadgeName): \(badgeStatus)"
     }
     
-    if let imageURL = recipe.imageURL, let url = URL(string: imageURL) {
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data else {
-                print("Error downloading image: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
-            let imageFile = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(recipe.title ?? "recipe").jpg")
-            do {
-                try data.write(to: imageFile)
-                let imageItem = ShareItem(file: imageFile)
-                let av = UIActivityViewController(activityItems: [imageItem, shareText], applicationActivities: nil)
-                DispatchQueue.main.async {
-                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                       let rootViewController = windowScene.windows.first?.rootViewController {
-                        rootViewController.present(av, animated: true, completion: nil)
-                    }
-                }
-            } catch {
-                print("Error writing image to temporary directory: \(error)")
-            }
-        }
-        task.resume()
-    } else if let imageData = recipe.imageData, let image = UIImage(data: imageData) {
-        if let data = image.jpegData(compressionQuality: 1.0) {
-            let imageFile = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(recipe.title ?? "recipe").jpg")
-            do {
-                try data.write(to: imageFile)
-                let imageItem = ShareItem(file: imageFile)
-                let av = UIActivityViewController(activityItems: [imageItem, shareText], applicationActivities: nil)
-                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                   let rootViewController = windowScene.windows.first?.rootViewController {
-                    rootViewController.present(av, animated: true, completion: nil)
-                }
-            } catch {
-                print("Error writing image to temporary directory: \(error)")
-            }
-        }
-    } else {
-        let av = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+    var itemsToShare: [Any] = [shareText]
+    
+    if let image = recipe.imageData, let uiImage = UIImage(data: image) {
+        itemsToShare.append(uiImage)
+    }
+    
+    let activityViewController = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+    
+    if UIDevice.current.userInterfaceIdiom == .pad {
+        if let windowScene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController {
-            rootViewController.present(av, animated: true, completion: nil)
+            activityViewController.popoverPresentationController?.sourceView = rootViewController.view
+            activityViewController.popoverPresentationController?.sourceRect = CGRect(x: rootViewController.view.bounds.midX, y: rootViewController.view.bounds.midY, width: 0, height: 0)
+            activityViewController.popoverPresentationController?.permittedArrowDirections = []
+        }
+    }
+    
+    if let keyWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+       let rootViewController = keyWindowScene.windows.first?.rootViewController {
+        DispatchQueue.main.async {
+            rootViewController.present(activityViewController, animated: true, completion: nil)
         }
     }
 }
 
 class ShareItem: NSObject, UIActivityItemSource {
     var file: URL
-    
+
     init(file: URL) {
         self.file = file
     }
-    
+
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
         return file
     }
-    
+
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
         return file
     }
 }
+

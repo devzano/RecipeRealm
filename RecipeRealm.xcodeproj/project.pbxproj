@@ -8,14 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		150D137D2A6EFE5000E6DDC0 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 150D137C2A6EFE5000E6DDC0 /* CropViewController */; };
-		150D137F2A70174300E6DDC0 /* TOCropImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150D137E2A70174300E6DDC0 /* TOCropImageView.swift */; };
 		150D13812A7018CE00E6DDC0 /* TOCropImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150D13802A7018CE00E6DDC0 /* TOCropImageViewController.swift */; };
 		151524822A7080DA005E6CD6 /* RecipeRealm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 151524802A7080DA005E6CD6 /* RecipeRealm.xcdatamodeld */; };
-		153CF0CF2A74FDBD00E7E896 /* RecipeSharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CF0CE2A74FDBD00E7E896 /* RecipeSharedData.swift */; };
+		152A870C2AAA726A00A11822 /* Pods_RecipeRealm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9C8BADDDADF596294455642 /* Pods_RecipeRealm.framework */; };
+		152A87102AAA8D2E00A11822 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 152A870F2AAA8D2E00A11822 /* WebKit.framework */; };
+		1533F0BE2AA2BA72008C8DD3 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 1533F0BD2AA2BA72008C8DD3 /* SwiftMessages */; };
+		153CF0CF2A74FDBD00E7E896 /* RecipeAppSharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CF0CE2A74FDBD00E7E896 /* RecipeAppSharedData.swift */; };
 		153CF0DC2A75AAA100E7E896 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CF0DB2A75AAA100E7E896 /* ShareView.swift */; };
-		15A4A40B2A65CC7B005A6F7C /* ImagePicker+ImageBuutonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4A40A2A65CC7B005A6F7C /* ImagePicker+ImageBuutonView.swift */; };
-		15A4A4102A660951005A6F7C /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4A40F2A660951005A6F7C /* SearchBar.swift */; };
-		15D376B42A69DCFA0043D94F /* SarfariView+WKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D376B32A69DCFA0043D94F /* SarfariView+WKWebView.swift */; };
+		15886A3F2AA1683000F9A371 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 15886A3E2AA1683000F9A371 /* TOCropViewController */; };
+		15A4A40B2A65CC7B005A6F7C /* ImagePicker+ImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4A40A2A65CC7B005A6F7C /* ImagePicker+ImageButtonView.swift */; };
+		15A4A4102A660951005A6F7C /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4A40F2A660951005A6F7C /* SearchBarView.swift */; };
+		15B156DD2A9A831600FBFC80 /* GoogleImageSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B156DC2A9A831600FBFC80 /* GoogleImageSearchView.swift */; };
+		15D376B42A69DCFA0043D94F /* WKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D376B32A69DCFA0043D94F /* WKWebView.swift */; };
 		15D376B62A69DD2B0043D94F /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D376B52A69DD2B0043D94F /* ActivityIndicatorView.swift */; };
 		15E2ACD12A131C590085CDC8 /* RecipeRealmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E2ACD02A131C590085CDC8 /* RecipeRealmApp.swift */; };
 		15E2ACD32A131C590085CDC8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E2ACD22A131C590085CDC8 /* ContentView.swift */; };
@@ -28,14 +32,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		150D137E2A70174300E6DDC0 /* TOCropImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOCropImageView.swift; sourceTree = "<group>"; };
 		150D13802A7018CE00E6DDC0 /* TOCropImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOCropImageViewController.swift; sourceTree = "<group>"; };
 		151524812A7080DA005E6CD6 /* RecipeRealm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecipeRealm.xcdatamodel; sourceTree = "<group>"; };
-		153CF0CE2A74FDBD00E7E896 /* RecipeSharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSharedData.swift; sourceTree = "<group>"; };
+		152A870F2AAA8D2E00A11822 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		153CF0CE2A74FDBD00E7E896 /* RecipeAppSharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAppSharedData.swift; sourceTree = "<group>"; };
 		153CF0DB2A75AAA100E7E896 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
-		15A4A40A2A65CC7B005A6F7C /* ImagePicker+ImageBuutonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagePicker+ImageBuutonView.swift"; sourceTree = "<group>"; };
-		15A4A40F2A660951005A6F7C /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		15D376B32A69DCFA0043D94F /* SarfariView+WKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SarfariView+WKWebView.swift"; sourceTree = "<group>"; };
+		15A4A40A2A65CC7B005A6F7C /* ImagePicker+ImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagePicker+ImageButtonView.swift"; sourceTree = "<group>"; };
+		15A4A40F2A660951005A6F7C /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		15B156DC2A9A831600FBFC80 /* GoogleImageSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleImageSearchView.swift; sourceTree = "<group>"; };
+		15D376B32A69DCFA0043D94F /* WKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebView.swift; sourceTree = "<group>"; };
 		15D376B52A69DD2B0043D94F /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		15E2ACCD2A131C590085CDC8 /* RecipeRealm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeRealm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15E2ACD02A131C590085CDC8 /* RecipeRealmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRealmApp.swift; sourceTree = "<group>"; };
@@ -46,6 +51,9 @@
 		15E2ACE32A131CEA0085CDC8 /* NewRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeView.swift; sourceTree = "<group>"; };
 		15E2ACE52A131D070085CDC8 /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListView.swift; sourceTree = "<group>"; };
 		15E2ACE72A131D6C0085CDC8 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		210C2926FC0D293DD8B4AE0F /* Pods-RecipeRealm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeRealm.release.xcconfig"; path = "Target Support Files/Pods-RecipeRealm/Pods-RecipeRealm.release.xcconfig"; sourceTree = "<group>"; };
+		E6DC1725AAA496201F78D170 /* Pods-RecipeRealm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeRealm.debug.xcconfig"; path = "Target Support Files/Pods-RecipeRealm/Pods-RecipeRealm.debug.xcconfig"; sourceTree = "<group>"; };
+		F9C8BADDDADF596294455642 /* Pods_RecipeRealm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeRealm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +61,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				152A87102AAA8D2E00A11822 /* WebKit.framework in Frameworks */,
+				152A870C2AAA726A00A11822 /* Pods_RecipeRealm.framework in Frameworks */,
+				15886A3F2AA1683000F9A371 /* TOCropViewController in Frameworks */,
+				1533F0BE2AA2BA72008C8DD3 /* SwiftMessages in Frameworks */,
 				150D137D2A6EFE5000E6DDC0 /* CropViewController in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,14 +76,42 @@
 			isa = PBXGroup;
 			children = (
 				15D376B52A69DD2B0043D94F /* ActivityIndicatorView.swift */,
-				15A4A40A2A65CC7B005A6F7C /* ImagePicker+ImageBuutonView.swift */,
-				15D376B32A69DCFA0043D94F /* SarfariView+WKWebView.swift */,
-				15A4A40F2A660951005A6F7C /* SearchBar.swift */,
+				15A4A40A2A65CC7B005A6F7C /* ImagePicker+ImageButtonView.swift */,
+				15D376B32A69DCFA0043D94F /* WKWebView.swift */,
+				15A4A40F2A660951005A6F7C /* SearchBarView.swift */,
 				153CF0DB2A75AAA100E7E896 /* ShareView.swift */,
-				150D137E2A70174300E6DDC0 /* TOCropImageView.swift */,
 				150D13802A7018CE00E6DDC0 /* TOCropImageViewController.swift */,
+				15B156DC2A9A831600FBFC80 /* GoogleImageSearchView.swift */,
 			);
 			path = UIViews;
+			sourceTree = "<group>";
+		};
+		15B156D92A9A63B900FBFC80 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				15E2ACD02A131C590085CDC8 /* RecipeRealmApp.swift */,
+				153CF0CE2A74FDBD00E7E896 /* RecipeAppSharedData.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		15B156DA2A9A63C700FBFC80 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				15E2ACE52A131D070085CDC8 /* RecipeListView.swift */,
+				15E2ACE72A131D6C0085CDC8 /* RecipeDetailView.swift */,
+				15E2ACE32A131CEA0085CDC8 /* NewRecipeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		15B156DB2A9A63D000FBFC80 /* RootView */ = {
+			isa = PBXGroup;
+			children = (
+				15E2ACD92A131C5A0085CDC8 /* Persistence.swift */,
+				15E2ACD22A131C590085CDC8 /* ContentView.swift */,
+			);
+			path = RootView;
 			sourceTree = "<group>";
 		};
 		15E2ACC42A131C590085CDC8 = {
@@ -79,6 +119,8 @@
 			children = (
 				15E2ACCF2A131C590085CDC8 /* RecipeRealm */,
 				15E2ACCE2A131C590085CDC8 /* Products */,
+				6ACFF8C3610D637F1652A804 /* Pods */,
+				DE3A0D6F662E8FA5074F8815 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,17 +135,13 @@
 		15E2ACCF2A131C590085CDC8 /* RecipeRealm */ = {
 			isa = PBXGroup;
 			children = (
-				15E2ACD62A131C5A0085CDC8 /* Preview Content */,
+				15B156D92A9A63B900FBFC80 /* App */,
+				15B156DB2A9A63D000FBFC80 /* RootView */,
+				15B156DA2A9A63C700FBFC80 /* Views */,
 				15A4A40C2A65DB11005A6F7C /* UIViews */,
-				15E2ACD02A131C590085CDC8 /* RecipeRealmApp.swift */,
-				15E2ACD22A131C590085CDC8 /* ContentView.swift */,
-				15E2ACD92A131C5A0085CDC8 /* Persistence.swift */,
-				15E2ACE52A131D070085CDC8 /* RecipeListView.swift */,
-				15E2ACE72A131D6C0085CDC8 /* RecipeDetailView.swift */,
-				15E2ACE32A131CEA0085CDC8 /* NewRecipeView.swift */,
-				153CF0CE2A74FDBD00E7E896 /* RecipeSharedData.swift */,
 				15E2ACD42A131C5A0085CDC8 /* Assets.xcassets */,
 				151524802A7080DA005E6CD6 /* RecipeRealm.xcdatamodeld */,
+				15E2ACD62A131C5A0085CDC8 /* Preview Content */,
 			);
 			path = RecipeRealm;
 			sourceTree = "<group>";
@@ -116,6 +154,24 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		6ACFF8C3610D637F1652A804 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E6DC1725AAA496201F78D170 /* Pods-RecipeRealm.debug.xcconfig */,
+				210C2926FC0D293DD8B4AE0F /* Pods-RecipeRealm.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DE3A0D6F662E8FA5074F8815 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				152A870F2AAA8D2E00A11822 /* WebKit.framework */,
+				F9C8BADDDADF596294455642 /* Pods_RecipeRealm.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -123,9 +179,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 15E2ACE02A131C5A0085CDC8 /* Build configuration list for PBXNativeTarget "RecipeRealm" */;
 			buildPhases = (
+				0DCA114721CCA8E060E0C496 /* [CP] Check Pods Manifest.lock */,
 				15E2ACC92A131C590085CDC8 /* Sources */,
 				15E2ACCA2A131C590085CDC8 /* Frameworks */,
 				15E2ACCB2A131C590085CDC8 /* Resources */,
+				A674D13820563518DA2B7731 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -134,6 +192,8 @@
 			name = RecipeRealm;
 			packageProductDependencies = (
 				150D137C2A6EFE5000E6DDC0 /* CropViewController */,
+				15886A3E2AA1683000F9A371 /* TOCropViewController */,
+				1533F0BD2AA2BA72008C8DD3 /* SwiftMessages */,
 			);
 			productName = RecipeRealm;
 			productReference = 15E2ACCD2A131C590085CDC8 /* RecipeRealm.app */;
@@ -165,6 +225,7 @@
 			mainGroup = 15E2ACC42A131C590085CDC8;
 			packageReferences = (
 				150D137B2A6EFE5000E6DDC0 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
+				1533F0BC2AA2BA72008C8DD3 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
 			productRefGroup = 15E2ACCE2A131C590085CDC8 /* Products */;
 			projectDirPath = "";
@@ -187,6 +248,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0DCA114721CCA8E060E0C496 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RecipeRealm-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A674D13820563518DA2B7731 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RecipeRealm/Pods-RecipeRealm-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RecipeRealm/Pods-RecipeRealm-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RecipeRealm/Pods-RecipeRealm-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		15E2ACC92A131C590085CDC8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -194,17 +297,17 @@
 			files = (
 				153CF0DC2A75AAA100E7E896 /* ShareView.swift in Sources */,
 				151524822A7080DA005E6CD6 /* RecipeRealm.xcdatamodeld in Sources */,
-				150D137F2A70174300E6DDC0 /* TOCropImageView.swift in Sources */,
 				15E2ACE82A131D6C0085CDC8 /* RecipeDetailView.swift in Sources */,
 				15E2ACE62A131D070085CDC8 /* RecipeListView.swift in Sources */,
+				15B156DD2A9A831600FBFC80 /* GoogleImageSearchView.swift in Sources */,
 				15E2ACDA2A131C5A0085CDC8 /* Persistence.swift in Sources */,
 				15D376B62A69DD2B0043D94F /* ActivityIndicatorView.swift in Sources */,
-				15D376B42A69DCFA0043D94F /* SarfariView+WKWebView.swift in Sources */,
+				15D376B42A69DCFA0043D94F /* WKWebView.swift in Sources */,
 				150D13812A7018CE00E6DDC0 /* TOCropImageViewController.swift in Sources */,
 				15E2ACE42A131CEA0085CDC8 /* NewRecipeView.swift in Sources */,
-				15A4A40B2A65CC7B005A6F7C /* ImagePicker+ImageBuutonView.swift in Sources */,
-				15A4A4102A660951005A6F7C /* SearchBar.swift in Sources */,
-				153CF0CF2A74FDBD00E7E896 /* RecipeSharedData.swift in Sources */,
+				15A4A40B2A65CC7B005A6F7C /* ImagePicker+ImageButtonView.swift in Sources */,
+				15A4A4102A660951005A6F7C /* SearchBarView.swift in Sources */,
+				153CF0CF2A74FDBD00E7E896 /* RecipeAppSharedData.swift in Sources */,
 				15E2ACD32A131C590085CDC8 /* ContentView.swift in Sources */,
 				15E2ACD12A131C590085CDC8 /* RecipeRealmApp.swift in Sources */,
 			);
@@ -329,71 +432,75 @@
 		};
 		15E2ACE12A131C5A0085CDC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6DC1725AAA496201F78D170 /* Pods-RecipeRealm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"RecipeRealm/Preview Content\"";
 				DEVELOPMENT_TEAM = RZB7U5UTY4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RecipeRealm/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RecipeRealm;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSCameraUsageDescription = "RecipeRealm needs access to the camera to upload and display a image for recipes";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "RecipeRealm needs access to the photo library to upload and display a image for recipes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.manzano-dev.RecipeRealm";
+				MARKETING_VERSION = 1.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devzano.RecipeRealm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		15E2ACE22A131C5A0085CDC8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 210C2926FC0D293DD8B4AE0F /* Pods-RecipeRealm.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"RecipeRealm/Preview Content\"";
 				DEVELOPMENT_TEAM = RZB7U5UTY4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RecipeRealm/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RecipeRealm;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSCameraUsageDescription = "RecipeRealm needs access to the camera to upload and display a image for recipes";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "RecipeRealm needs access to the photo library to upload and display a image for recipes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.manzano-dev.RecipeRealm";
+				MARKETING_VERSION = 1.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devzano.RecipeRealm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -429,6 +536,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		1533F0BC2AA2BA72008C8DD3 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -436,6 +551,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 150D137B2A6EFE5000E6DDC0 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
 			productName = CropViewController;
+		};
+		1533F0BD2AA2BA72008C8DD3 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1533F0BC2AA2BA72008C8DD3 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
+		};
+		15886A3E2AA1683000F9A371 /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 150D137B2A6EFE5000E6DDC0 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
 		};
 /* End XCSwiftPackageProductDependency section */
 

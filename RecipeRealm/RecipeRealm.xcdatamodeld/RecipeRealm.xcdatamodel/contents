@@ -6,8 +6,9 @@
         <attribute name="dairyFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="glutenFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="gmoFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
-        <attribute name="imageURL" optional="YES" attributeType="String"/>
+        <attribute name="imageSearch" optional="YES" attributeType="String"/>
         <attribute name="ingredients" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="nutritionalBadges" optional="YES" attributeType="String"/>

@@ -1,5 +1,5 @@
 //
-//  SearchBar.swift
+//  SearchBarView.swift
 //  RecipeRealm
 //
 //  Created by Ruben Manzano on 7/17/23.

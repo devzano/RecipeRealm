@@ -41,13 +41,12 @@ struct ImagePickerView: UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePickerView>) -> UIImagePickerController {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = sourceType
-        imagePickerController.allowsEditing = true
+        imagePickerController.allowsEditing = false
         imagePickerController.delegate = context.coordinator
         return imagePickerController
     }
     
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePickerView>) {
-    }
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePickerView>) {}
     
     func makeCoordinator() -> Coordinator {
         Coordinator(image: $image)
@@ -60,7 +59,7 @@ struct ImagePickerView: UIViewControllerRepresentable {
         }
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let image = info[.editedImage] as? UIImage {
+            if let image = info[.originalImage] as? UIImage {
                 self.image = image
             }
             picker.dismiss(animated: true)
