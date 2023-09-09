@@ -12,7 +12,7 @@
           <img src="/Screenshots/RecipeRealm (Home2).png" alt="RecipeRealm List View" width="300">
         </td>
         <td align="center">
-          <img src="/Screenshots/RecipeRealm (Home/Share).png" alt="RecipeRealm New Recipe View" width="300">
+          <img src="/Screenshots/RecipeRealm (Share).png" alt="RecipeRealm List/Share Recipe View" width="300">
         </td>
         <td align="center">
           <img src="/Screenshots/RecipeRealm (New).png" alt="RecipeRealm New Recipe View 2" width="300">
