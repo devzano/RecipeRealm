@@ -15,17 +15,40 @@ func generateRecipeDeepLink(recipe: Recipe) -> URL? {
     components.host = "app"
     components.path = "/recipe"
     
-    let recipeProperties: [String: String] = [
-        "id": recipe.id ?? "",
-        "title": recipe.title ?? "",
-        "preptime": recipe.prepTime ?? "",
-        "cooktime": recipe.cookTime ?? "",
-        "cuisine": recipe.cuisines ?? "",
-        "ingredients": recipe.ingredients ?? "",
-        "steps": recipe.steps ?? "",
-        "notes": recipe.notes ?? "",
-        "url": recipe.recipeURL ?? ""
+    let nutritionBadgeNames = [
+        ("Gluten Free", recipe.glutenFree),
+        ("Sugar Free", recipe.sugarFree),
+        ("Dairy Free", recipe.dairyFree),
+        ("GMO Free", recipe.gmoFree),
+        ("Organic", recipe.organic),
+        ("Vegetarian", recipe.vegetarian),
+        ("Peanut Free", recipe.peanutFree),
+        ("Nut Free", recipe.nutFree),
+        ("Egg Free", recipe.eggFree),
+        ("No Trans Fat", recipe.noTransFat),
+        ("Corn Free", recipe.cornFree),
+        ("Soy Free", recipe.soyFree)
     ]
+    
+    var recipeProperties: [String: String] = [
+        "Title": recipe.title ?? "",
+        "Prep Time": recipe.prepTime ?? "",
+        "Cook Time": recipe.cookTime ?? "",
+        "Cuisine": recipe.cuisines ?? "",
+        "Ingredients": recipe.ingredients ?? "",
+        "Steps": recipe.steps ?? "",
+        "Notes": recipe.notes ?? "",
+        "URL": recipe.recipeURL ?? ""
+    ]
+    
+    if let imageData = recipe.imageData {
+        recipeProperties["Image"] = convertDataToBase64String(imageData)
+    }
+    
+    for (nutritionBadgeName, nutritionBadgeSelected) in nutritionBadgeNames {
+        let badgeStatus = nutritionBadgeSelected ? "Yes" : "No"
+        recipeProperties[nutritionBadgeName] = badgeStatus
+    }
     
     components.queryItems = recipeProperties.map {
         URLQueryItem(name: $0.key, value: $0.value)
@@ -34,12 +57,28 @@ func generateRecipeDeepLink(recipe: Recipe) -> URL? {
     return components.url
 }
 
+func convertDataToBase64String(_ data: Data?) -> String {
+    return data?.base64EncodedString() ?? ""
+}
+
 func deepShareRecipe(recipe: Recipe) {
     guard let deepLinkURL = generateRecipeDeepLink(recipe: recipe) else { return }
     let activityViewController = UIActivityViewController(activityItems: [deepLinkURL], applicationActivities: nil)
+    
+    if UIDevice.current.userInterfaceIdiom == .pad {
+        if let windowScene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController {
+            activityViewController.popoverPresentationController?.sourceView = rootViewController.view
+            activityViewController.popoverPresentationController?.sourceRect = CGRect(x: rootViewController.view.bounds.midX, y: rootViewController.view.bounds.midY, width: 0, height: 0)
+            activityViewController.popoverPresentationController?.permittedArrowDirections = []
+        }
+    }
+    
     if let keyWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
        let rootViewController = keyWindowScene.windows.first?.rootViewController {
-        rootViewController.present(activityViewController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            rootViewController.present(activityViewController, animated: true, completion: nil)
+        }
     }
 }
 
@@ -80,7 +119,13 @@ func shareRecipe(recipe: Recipe) {
         ("Dairy-Free", recipe.dairyFree),
         ("GMO-Free", recipe.gmoFree),
         ("Organic", recipe.organic),
-        ("Vegetarian", recipe.vegetarian)
+        ("Vegetarian", recipe.vegetarian),
+        ("Peanut Free", recipe.peanutFree),
+        ("Nut Free", recipe.nutFree),
+        ("Egg Free", recipe.eggFree),
+        ("No Trans Fat", recipe.noTransFat),
+        ("Corn Free", recipe.cornFree),
+        ("Soy Free", recipe.soyFree)
     ]
     
     for (nutritionBadgeName, nutritionBadgeSelected) in nutritionBadgeNames {

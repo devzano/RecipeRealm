@@ -12,37 +12,95 @@ import UIKit
 import Photos
 import PhotosUI
 import AVFoundation
+import SwiftMessages
 
-struct DeepLinkedRecipe {
-    var id: String?
-    var title: String?
-    var prepTime: String?
-    var cookTime: String?
-    var cuisines: String?
-    var ingredients: String?
-    var steps: String?
-    var notes: String?
-}
-
+//struct DeepLinkedRecipe {
+//    var id: String?
+//    var title: String?
+//    var prepTime: String?
+//    var cookTime: String?
+//    var cuisines: String?
+//    var ingredients: String?
+//    var steps: String?
+//    var notes: String?
+//}
 
 // MARK: - App States
 class AppStates: ObservableObject {
-    @Published var showDeleteConfirmation = false
-    @Published var isColorPickerVisible = false
-    @Published var showSourcePicker = false
-    @Published var showImagePicker = false
-    @Published var imageSource: ImageSource = .photoLibrary
+    // MARK: Request Library & Photo Access
     @Published var photoLibraryAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
     @Published var cameraAuthorizationStatus = AVAuthorizationStatus.authorized
+    // MARK: Image Source & Picker
+    @Published var imageSource: ImageSource = .photoLibrary
+    @Published var showSourcePicker = false
+    @Published var showImagePicker = false
+    // MARK: Text
+    @Published var imageSearch = ""
+    @Published var currentStepNumber: Int = 1
+    @Published var currentBullet: String = "•"
+    // MARK: Alerts
+    @Published var showDeleteConfirmation = false
+    @Published var showAlert = false
+    // MARK: UIViews
+    @Published var isColorPickerVisible = false
+    @Published var showWebView: Bool = false
+    @Published var isSearchingImage = false
+    // MARK: DeepLink URL Handling
+    @Published var deepNewRecipeView: Bool = false
+    let appScheme = "RecipeRealm"
+    let appHost = "app"
+    let appPath = "/recipe"
+    @State private var showErrorAlert = false
+    @State private var errorMessage = ""
+    
+    @Published var isListView: Bool = UserDefaults.standard.bool(forKey: selectedViewKey)
+    @Published var selectedAccentColor: Color = UserDefaults.standard.color(forKey: selectedAccentColorKey) ?? .accentColor
+
+}
+
+let selectedAccentColorKey = "SelectedAccentColor"
+let selectedViewKey = "SelectedView"
+
+// MARK: - Device Zoomed Check & Text Size
+var isZoomed: Bool { UIScreen.main.scale < UIScreen.main.nativeScale }
+var sizeCategory: ContentSizeCategory {
+    mapContentSizeCategory(UIApplication.shared.preferredContentSizeCategory)
+}
+
+func adjustedFontSize(baseSize: CGFloat, sizeCategory: ContentSizeCategory) -> CGFloat {
+    switch sizeCategory {
+    case .large, .extraLarge, .extraExtraLarge, .extraExtraExtraLarge:
+        return baseSize
+    case .extraSmall: return baseSize * 0.8
+    case .small: return baseSize * 0.9
+    case .medium: return baseSize
+    default: return baseSize
+    }
+}
+
+func mapContentSizeCategory(_ uiContentSizeCategory: UIContentSizeCategory) -> ContentSizeCategory {
+    switch uiContentSizeCategory {
+    case .extraSmall: return .extraSmall
+    case .small: return .small
+    case .medium: return .medium
+    case .large: return .large
+    case .extraLarge: return .extraLarge
+    case .extraExtraLarge: return .extraExtraLarge
+    case .extraExtraExtraLarge: return .extraExtraExtraLarge
+    default: return .medium
+    }
 }
 
 // MARK: - Placeholder Editor
 struct PlaceholderTextEditorView: View {
     @Binding var text: String
     var placeholder: String
-
+    let baseSize: CGFloat = 19
+    
     var body: some View {
-        ZStack(alignment: .topLeading) {
+        let textSize = adjustedFontSize(baseSize: baseSize, sizeCategory: sizeCategory)
+
+        return ZStack(alignment: .topLeading) {
             if text.isEmpty {
                 Text(placeholder)
                     .foregroundColor(Color.gray.opacity(0.6))
@@ -52,17 +110,20 @@ struct PlaceholderTextEditorView: View {
                 .frame(height: 100)
                 .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.gray))
                 .foregroundColor(Color.primary)
-        }
+        }.font(.system(size: textSize))
     }
 }
 
 // MARK: - Section Header Titles
 struct SectionHeaderTitlesView: View {
     let title: String
+    let baseSize: CGFloat = 19
 
     var body: some View {
-        Text(title)
-            .fontWeight(.bold)
+        let textSize = adjustedFontSize(baseSize: baseSize, sizeCategory: sizeCategory)
+        
+        return Text(title)
+            .font(.system(size: textSize))
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .listRowInsets(EdgeInsets(top: 30, leading: 0, bottom: 15, trailing: 0))
     }
@@ -74,14 +135,20 @@ func nutritionBadgeImg(_ imageName: String) -> some View {
         .resizable()
         .frame(width: 40, height: 40)
 }
-//struct NutritionBadges: Codable {
-//    var glutenFree: Bool
-//    var sugarFree: Bool
-//    var dairyFree: Bool
-//    var gmoFree: Bool
-//    var organic: Bool
-//    var vegetarian: Bool
-//}
+struct NutritionBadges: Codable {
+    var glutenFree: Bool
+    var sugarFree: Bool
+    var dairyFree: Bool
+    var gmoFree: Bool
+    var organic: Bool
+    var vegetarian: Bool
+    var peanutFree: Bool
+    var nutFree: Bool
+    var eggFree: Bool
+    var noTransFat: Bool
+    var cornFree: Bool
+    var soyFree: Bool
+}
 
 // MARK: - Cuisine Names
 let cuisineOptions = [
@@ -120,59 +187,3 @@ let cuisineOptions = [
     "Turkish",
     "Vietnamese"
 ]
-
-// MARK: ColorPicker View
-struct CustomColorPicker: View {
-    @Binding var selectedAccentColor: Color
-    @Binding var isColorPickerVisible: Bool
-    
-    var body: some View {
-        ColorPicker("Pick Your Color", selection: $selectedAccentColor)
-            .padding()
-            .onChange(of: selectedAccentColor) { newColor in
-                UserDefaults.standard.setColor(newColor, forKey: selectedAccentColorKey)
-            }
-    }
-}
-extension UserDefaults {
-    func setColor(_ color: Color, forKey key: String) {
-        do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: UIColor(color), requiringSecureCoding: false)
-            set(data, forKey: key)
-        } catch {
-            print("Error archiving color: \(error.localizedDescription)")
-        }
-    }
-    
-    func color(forKey key: String) -> Color? {
-        guard let data = data(forKey: key) else { return nil }
-        do {
-            guard let uiColor = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data) else { return nil }
-            return Color(uiColor)
-        } catch {
-            print("Error unarchiving color: \(error.localizedDescription)")
-            return nil
-        }
-    }
-}
-
-// MARK: ContextMenu View
-struct RecipeContextMenu: View {
-    let recipe: Recipe
-    let deleteAction: () -> Void
-    let shareAction: () -> Void
-
-    var body: some View {
-        Button(action: shareAction) {
-            Label("Share Recipe", systemImage: "doc.on.doc")
-        }
-        // Button(action: {
-        //     deepShareRecipe(recipe: recipe)
-        // }) {
-        //     Label("Share Recipe Link", systemImage: "link")
-        // }
-        Button(role: .destructive, action: deleteAction) {
-            Label("Delete Recipe", systemImage: "trash")
-        }
-    }
-}

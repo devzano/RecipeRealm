@@ -11,19 +11,14 @@ import PhotosUI
 import TOCropViewController
 import SwiftMessages
 
+//if UIDevice.current.userInterfaceIdiom == .pad{}
+
 struct RecipeDetailView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject private var appStates = AppStates()
     let recipe: Recipe
     @State private var showTOCropViewController = false
-    @State private var showAlert = false
-    @State private var showWebView: Bool = false
-    @State private var isSearchingImage = false
-    @State private var imageSearch = ""
-    @State private var googleImageSearchURL: URL? = nil
     @State private var detailTapped: [Substring: Bool] = [:]
-    @State private var currentStepNumber: Int = 1
-    @State private var currentBullet: String = "•"
     // MARK: Update Users Recipe
     @State private var editingMode = false
     @State var selectedImage: UIImage?
@@ -37,6 +32,12 @@ struct RecipeDetailView: View {
     @State private var gmoFree: Bool
     @State private var organic: Bool
     @State private var vegetarian: Bool
+    @State private var peanutFree: Bool
+    @State private var nutFree: Bool
+    @State private var eggFree: Bool
+    @State private var noTransFat: Bool
+    @State private var cornFree: Bool
+    @State private var soyFree: Bool
     @State private var selectedCuisine: Int
     @State private var updatedIngredients: String
     @State private var updatedSteps: String
@@ -64,6 +65,12 @@ struct RecipeDetailView: View {
         _gmoFree = State(initialValue: recipe.gmoFree)
         _organic = State(initialValue: recipe.organic)
         _vegetarian = State(initialValue: recipe.vegetarian)
+        _peanutFree = State(initialValue: recipe.peanutFree)
+        _nutFree = State(initialValue: recipe.nutFree)
+        _eggFree = State(initialValue: recipe.eggFree)
+        _noTransFat = State(initialValue: recipe.noTransFat)
+        _cornFree = State(initialValue: recipe.cornFree)
+        _soyFree = State(initialValue: recipe.soyFree)
         _updatedIngredients = State(initialValue: recipe.ingredients ?? "")
         _updatedSteps = State(initialValue: recipe.steps ?? "")
         _updatedNotes = State(initialValue: recipe.notes ?? "")
@@ -76,13 +83,26 @@ struct RecipeDetailView: View {
             Spacer()
             VStack(spacing: 0) {
                 Text(updatedTitle)
-                    .font(.largeTitle)
+                    .font(.system(size: 30))
                     .foregroundColor(.primary)
                     .multilineTextAlignment(.center)
             }
             Spacer()
             List {
-                imageSection
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    iPadSection
+                }
+                
+                if UIDevice.current.userInterfaceIdiom != .pad {
+                    imageSection
+                    if !editingMode {
+                        if !updatedPrepTime.isEmpty || !updatedCookTime.isEmpty {
+                            prepAndCookTimeSection
+                        }
+                        nutritionAndCuisineSection
+                    }
+                }
+                
                 if editingMode {
                     editTitleSection
                     editPrepAndCookTimeSection
@@ -93,10 +113,6 @@ struct RecipeDetailView: View {
                     editNotesSection
                     editRecipeURLSection
                 } else {
-                    if !updatedPrepTime.isEmpty || !updatedCookTime.isEmpty {
-                        prepAndCookTimeSection
-                    }
-                    nutritionAndCuisineSection
                     ingredientsSection
                     stepsSection
                     if !updatedNotes.isEmpty {
@@ -122,6 +138,77 @@ struct RecipeDetailView: View {
                     Text(editingMode ? "Done" : "Edit")
                 }
             )
+        }.font(.system(size: 19))
+    }
+    
+    // MARK: iPad Section
+    private var iPadSection: some View {
+        Section(header: SectionHeaderTitlesView(title: "")) {
+            Group {
+                HStack {
+                    if let image = selectedImage {
+                        HStack {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxWidth: 450, maxHeight: 450)
+                        }
+                    } else if !editingMode {
+                        Text("Present a picture of your recipe!")
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    }
+                    
+                    VStack {
+                        prepAndCookTimeSection
+                        nutritionAndCuisineSection
+                    }
+                }
+                
+                if editingMode {
+                    if selectedImage == nil {
+                        HStack {
+                            TextField("Image Search", text: $appStates.imageSearch)
+                                .onChange(of: appStates.imageSearch) { _ in
+                                    appStates.isSearchingImage = true
+                                }
+                            Button(action: {
+                                appStates.showWebView.toggle()
+                            }) {
+                                HStack {
+                                    Text("Search With")
+                                    Image("GoogleLogo")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                }
+                            }
+                            .buttonStyle(.borderless)
+                            .sheet(isPresented: $appStates.showWebView) {
+                                GoogleImageSearchView(isPresented: $appStates.showWebView, searchQuery: $appStates.imageSearch)
+                            }
+                        }.listRowSeparator(.hidden)
+                    }
+                    
+                    HStack {
+                        if selectedImage == nil {
+                            ImagePickerButton(showSourcePicker: $appStates.showSourcePicker, showImagePicker: $appStates.showImagePicker, imageSource: $appStates.imageSource, photoLibraryAuthorizationStatus: $appStates.photoLibraryAuthorizationStatus, cameraAuthorizationStatus: $appStates.cameraAuthorizationStatus)
+                        }
+                        
+                        if editingMode && selectedImage != nil {
+                            TOCropImageView(selectedImage: $selectedImage)
+                            
+                            HStack {
+                                Image(systemName: "trash")
+                                Text("Delete Photo")
+                            }
+                            .onTapGesture {
+                                deletePhoto()
+                            }
+                            .foregroundColor(.red)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -148,12 +235,12 @@ struct RecipeDetailView: View {
                     if editingMode {
                         if selectedImage == nil {
                             HStack {
-                                TextField("Image Search", text: $imageSearch)
-                                    .onChange(of: imageSearch) { _ in
-                                        isSearchingImage = true
+                                TextField("Image Search", text: $appStates.imageSearch)
+                                    .onChange(of: appStates.imageSearch) { _ in
+                                        appStates.isSearchingImage = true
                                     }
                                 Button(action: {
-                                    showWebView.toggle()
+                                    appStates.showWebView.toggle()
                                 }) {
                                     HStack {
                                         Text("Search With")
@@ -163,8 +250,8 @@ struct RecipeDetailView: View {
                                     }
                                 }
                                 .buttonStyle(.borderless)
-                                .sheet(isPresented: $showWebView) {
-                                    GoogleImageSearchView(isPresented: $showWebView, searchQuery: $imageSearch)
+                                .sheet(isPresented: $appStates.showWebView) {
+                                    GoogleImageSearchView(isPresented: $appStates.showWebView, searchQuery: $appStates.imageSearch)
                                 }
                             }.listRowSeparator(.hidden)
                         }
@@ -231,21 +318,19 @@ struct RecipeDetailView: View {
                         .frame(width: 35, height: 35)
                         .foregroundColor(.orange)
                     Text(updatedPrepTime)
-                        .font(.headline)
                         .foregroundColor(.primary)
-                    Divider()
+                    Divider().background(appStates.selectedAccentColor)
                 }
                 
                 Spacer()
                 
                 if !updatedCookTime.isEmpty {
-                    Divider()
+                    Divider().background(appStates.selectedAccentColor)
                     Image(systemName: "flame.fill")
                         .resizable()
                         .frame(width: 30, height: 30)
                         .foregroundColor(.red)
                     Text(updatedCookTime)
-                        .font(.headline)
                         .foregroundColor(.primary)
                 }
             }
@@ -270,7 +355,7 @@ struct RecipeDetailView: View {
         Section(header: SectionHeaderTitlesView(title: "Prep & Cook Time")) {
             HStack {
                 TextField("Prep Time", text: $updatedPrepTime)
-                Divider()
+                Divider().background(appStates.selectedAccentColor)
                 TextField("Cook Time", text: $updatedCookTime)
             }
         }
@@ -279,8 +364,8 @@ struct RecipeDetailView: View {
     // MARK: Recipe's Nutrition Badges & Cuisine
     private var nutritionAndCuisineSection: some View {
         Section(header: SectionHeaderTitlesView(title: nutritionHeader)) {
-            if glutenFree || sugarFree || dairyFree || gmoFree || organic || vegetarian {
-                HStack(spacing: -4) {
+            if glutenFree || sugarFree || dairyFree || gmoFree || organic || vegetarian || peanutFree || nutFree || eggFree || noTransFat || cornFree || soyFree {
+                HStack(spacing: 4) {
                     Spacer ()
                     
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -303,12 +388,30 @@ struct RecipeDetailView: View {
                             if vegetarian {
                                 nutritionBadgeImg("Vegetarian")
                             }
+                            if peanutFree{
+                                nutritionBadgeImg("PeanutFree")
+                            }
+                            if nutFree {
+                                nutritionBadgeImg("NutFree")
+                            }
+                            if eggFree {
+                                nutritionBadgeImg("EggFree")
+                            }
+                            if noTransFat{
+                                nutritionBadgeImg("NoTransFat")
+                            }
+                            if cornFree {
+                                nutritionBadgeImg("CornFree")
+                            }
+                            if soyFree {
+                                nutritionBadgeImg("SoyFree")
+                            }
                         }
                     }
                     
                     Spacer()
                     
-                    Divider()
+                    Divider().background(appStates.selectedAccentColor)
                     
                     Spacer()
                     
@@ -319,6 +422,7 @@ struct RecipeDetailView: View {
             } else {
                 Text(cuisineOptions[selectedCuisine])
                     .foregroundColor(.primary)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
         }
     }
@@ -330,23 +434,39 @@ struct RecipeDetailView: View {
         }
     }
     private var editNutrionSection: some View {
-        Section(header: SectionHeaderTitlesView(title: "Nutrition Badges")) {
-            VStack {
-                HStack{
-                    Toggle("Gluten-Free", isOn: $glutenFree)
-                    Toggle("Sugar-Free", isOn: $sugarFree)
-                }
-                HStack {
-                    Toggle("Dairy-Free", isOn: $dairyFree)
-                    Toggle("GMO-Free", isOn: $gmoFree)
-                }
-                HStack {
-                    Toggle("Organic", isOn: $organic)
-                    Toggle("Vegetarian", isOn: $vegetarian)
-                }
+        let baseSize: CGFloat = 17
+        let textSize = adjustedFontSize(baseSize: baseSize, sizeCategory: sizeCategory)
+        
+        return Section(header: SectionHeaderTitlesView(title: "Nutrition Badges")) {
+            HStack(spacing: 8) {
+                Toggle("Gluten Free", isOn: $glutenFree)
+                Toggle("Sugar Free", isOn: $sugarFree)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            HStack(spacing: 8) {
+                Toggle("Dairy Free", isOn: $dairyFree)
+                Toggle("GMO Free", isOn: $gmoFree)
+            }
+            HStack(spacing: 8) {
+                Toggle("Organic", isOn: $organic)
+                Toggle("Vegetarian", isOn: $vegetarian)
+            }
+            HStack(spacing: 8) {
+                Toggle("Peanut Free", isOn: $peanutFree)
+                Toggle("Nut Free", isOn: $nutFree)
+            }
+            HStack(spacing: 8) {
+                Toggle("Egg Free", isOn: $eggFree)
+                Toggle("No Trans Fat", isOn: $noTransFat)
+            }
+            HStack(spacing: 8) {
+                Toggle("Corn Free", isOn: $cornFree)
+                Toggle("Soy Free", isOn: $soyFree)
+            }
         }
+        .listRowSeparator(.hidden)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        .padding(.vertical, 8)
+        .font(.system(size: textSize))
     }
     private var editCuisineSection: some View {
         Section(header: SectionHeaderTitlesView(title: "Cuisine")) {
@@ -374,9 +494,8 @@ struct RecipeDetailView: View {
                     toggleIngredientTapped(ingredient)
                 }) {
                     HStack {
-                        Image(systemName: detailTapped[ingredient, default: false] ? "checkmark.circle.fill" : "circle")
-                            .foregroundColor(.accentColor)
-                        Text(String(removeBulletPoints(from: ingredient))).foregroundColor(.white)
+                        Image(systemName: detailTapped[ingredient, default: false] ? "checkmark.circle.fill" : "circle").foregroundColor(.accentColor)
+                        Text(String(removeBulletPoints(from: ingredient))).foregroundColor(.primary)
                     }
                 }
             }
@@ -398,8 +517,8 @@ struct RecipeDetailView: View {
         
         ingredientLines = ingredientLines.map { line in
             if !line.isEmpty {
-                if !line.starts(with: currentBullet) {
-                    return "\(currentBullet) \(line)"
+                if !line.starts(with: appStates.currentBullet) {
+                    return "\(appStates.currentBullet) \(line)"
                 }
             }
             return line
@@ -407,8 +526,8 @@ struct RecipeDetailView: View {
         
         noteLines = noteLines.map { line in
             if !line.isEmpty {
-                if !line.starts(with: currentBullet) {
-                    return "\(currentBullet) \(line)"
+                if !line.starts(with: appStates.currentBullet) {
+                    return "\(appStates.currentBullet) \(line)"
                 }
             }
             return line
@@ -421,7 +540,7 @@ struct RecipeDetailView: View {
         updatedNotes = updatedNoteText
     }
     func removeBulletPoints(from text: Substring) -> String {
-        let bulletPointPattern = "^\\\(currentBullet)\\s*"
+        let bulletPointPattern = "^\\\(appStates.currentBullet)\\s*"
         let regex = try! NSRegularExpression(pattern: bulletPointPattern, options: .anchorsMatchLines)
         let range = NSRange(text.startIndex..<text.endIndex, in: text)
         return regex.stringByReplacingMatches(in: String(text), options: [], range: range, withTemplate: "")
@@ -435,8 +554,8 @@ struct RecipeDetailView: View {
                     toggleStepTapped(step)
                 }) {
                     HStack {
-                        Image(systemName: detailTapped[step, default: false] ? "checkmark.circle.fill" : "circle")
-                        Text(removeNumbering(from: String(step))).foregroundColor(.white)
+                        Image(systemName: detailTapped[step, default: false] ? "checkmark.circle.fill" : "circle").foregroundColor(.accentColor)
+                        Text(removeNumbering(from: String(step))).foregroundColor(.primary)
                     }
                 }
             }
@@ -468,7 +587,7 @@ struct RecipeDetailView: View {
             if line.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 return line
             }
-            let stepNumber = currentStepNumber + index
+            let stepNumber = appStates.currentStepNumber + index
             return Substring("\(stepNumber). \(line)")
         }
         
@@ -536,6 +655,12 @@ struct RecipeDetailView: View {
         recipe.gmoFree = gmoFree
         recipe.organic = organic
         recipe.vegetarian = vegetarian
+        recipe.peanutFree = peanutFree
+        recipe.nutFree = nutFree
+        recipe.eggFree = eggFree
+        recipe.noTransFat = noTransFat
+        recipe.cornFree = cornFree
+        recipe.soyFree = soyFree
         recipe.steps = updatedSteps
         recipe.notes = updatedNotes
         recipe.recipeURL = updatedRecipeURL
@@ -586,5 +711,6 @@ struct RecipeDetailView_Previews: PreviewProvider {
             RecipeDetailView(recipe: recipe)
         }
         .environment(\.managedObjectContext, context)
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }

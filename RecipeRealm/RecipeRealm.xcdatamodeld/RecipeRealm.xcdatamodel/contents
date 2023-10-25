@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Folder" representedClassName="Folder" syncable="YES" codeGenerationType="class">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="recipes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Recipe" inverseName="folder" inverseEntity="Recipe"/>
+    </entity>
     <entity name="Recipe" representedClassName="Recipe" syncable="YES" codeGenerationType="class">
         <attribute name="cookTime" optional="YES" attributeType="String"/>
+        <attribute name="cornFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="cuisines" optional="YES" attributeType="String"/>
         <attribute name="dairyFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="eggFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="glutenFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="gmoFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
@@ -11,13 +19,18 @@
         <attribute name="imageSearch" optional="YES" attributeType="String"/>
         <attribute name="ingredients" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="noTransFat" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="nutFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="nutritionalBadges" optional="YES" attributeType="String"/>
         <attribute name="organic" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="peanutFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="prepTime" optional="YES" attributeType="String"/>
         <attribute name="recipeURL" optional="YES" attributeType="String"/>
+        <attribute name="soyFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="steps" optional="YES" attributeType="String"/>
         <attribute name="sugarFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="vegetarian" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="folder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="recipes" inverseEntity="Folder"/>
     </entity>
 </model>
