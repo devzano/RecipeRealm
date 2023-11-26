@@ -47,37 +47,37 @@ extension NewRecipeView {
             
             var currentSection: String?
             for line in clipboardContent.components(separatedBy: .newlines) {
-                if line.starts(with: "Title:") {
-                    importedTitle = line.replacingOccurrences(of: "Title:", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+                if line.starts(with: "T:") {
+                    importedTitle = line.replacingOccurrences(of: "T:", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
                     currentSection = nil
-                } else if line.starts(with: "Prep Time:") {
-                    importedPrepTime = line.replacingOccurrences(of: "Prep Time:", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
-                } else if line.starts(with: "Cook Time:") {
-                    importedCookTime = line.replacingOccurrences(of: "Cook Time:", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
-                } else if line.starts(with: "GlutenFree:") {
-                    importedGlutenFree = line.replacingOccurrences(of: "Gluten Free:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
-                } else if line.starts(with: "SugarFree:") {
-                    importedSugarFree = line.replacingOccurrences(of: "Sugar Free:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
-                } else if line.starts(with: "DairyFree:") {
-                    importedDairyFree = line.replacingOccurrences(of: "Dairy Free:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
-                } else if line.starts(with: "GMOFree:") {
-                    importedGMOFree = line.replacingOccurrences(of: "GMO Free:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
-                } else if line.starts(with: "Organic:") {
-                    importedOrganic = line.replacingOccurrences(of: "Organic:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
-                } else if line.starts(with: "Vegetarian:") {
-                    importedVegetarian = line.replacingOccurrences(of: "Vegetarian:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
-                } else if line.starts(with: "Peanut Free:") {
-                    importedPeanutFree = line.replacingOccurrences(of: "Peanut Free:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
-                } else if line.starts(with: "Nut Free:") {
-                    importedNutFree = line.replacingOccurrences(of: "Nut Free:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
-                } else if line.starts(with: "Egg Free:") {
-                    importedEggFree = line.replacingOccurrences(of: "Egg Free:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
-                } else if line.starts(with: "No Trans Fat:") {
-                    importedNoTransFat = line.replacingOccurrences(of: "No Trans Fat:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
-                } else if line.starts(with: "Corn Free:") {
-                    importedCornFree = line.replacingOccurrences(of: "Corn Free:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
-                } else if line.starts(with: "Soy Free:") {
-                    importedSoyFree = line.replacingOccurrences(of: "Soy Free:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
+                } else if line.starts(with: "PT:") {
+                    importedPrepTime = line.replacingOccurrences(of: "PT:", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+                } else if line.starts(with: "CT:") {
+                    importedCookTime = line.replacingOccurrences(of: "CT:", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+                } else if line.starts(with: "GLTNF:") {
+                    importedGlutenFree = line.replacingOccurrences(of: "GLTNF:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
+                } else if line.starts(with: "SGF:") {
+                    importedSugarFree = line.replacingOccurrences(of: "SGF:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
+                } else if line.starts(with: "DARYF:") {
+                    importedDairyFree = line.replacingOccurrences(of: "DARYF:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
+                } else if line.starts(with: "GMOF:") {
+                    importedGMOFree = line.replacingOccurrences(of: "GMOF:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
+                } else if line.starts(with: "O:") {
+                    importedOrganic = line.replacingOccurrences(of: "O:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
+                } else if line.starts(with: "V:") {
+                    importedVegetarian = line.replacingOccurrences(of: "V:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
+                } else if line.starts(with: "PNTF:") {
+                    importedPeanutFree = line.replacingOccurrences(of: "PNTF:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
+                } else if line.starts(with: "NUTF:") {
+                    importedNutFree = line.replacingOccurrences(of: "NUTF:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
+                } else if line.starts(with: "EGGF:") {
+                    importedEggFree = line.replacingOccurrences(of: "EGGF:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
+                } else if line.starts(with: "NTF:") {
+                    importedNoTransFat = line.replacingOccurrences(of: "NTF:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
+                } else if line.starts(with: "CRNF:") {
+                    importedCornFree = line.replacingOccurrences(of: "CRNF:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
+                } else if line.starts(with: "SOYF:") {
+                    importedSoyFree = line.replacingOccurrences(of: "SOYF:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "yes"
                 } else if line.starts(with: "Cuisine:") {
                     importedCuisine = line.replacingOccurrences(of: "Cuisine:", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
                 } else if line.starts(with: "Ingredients:") {
@@ -106,10 +106,6 @@ extension NewRecipeView {
                 }
             }
             
-            if !importedTitle.isEmpty && !importedIngredients.isEmpty && !importedSteps.isEmpty {
-                recipeFound = true
-            }
-            
             self.importedTitle = importedTitle
             self.importedPrepTime = importedPrepTime
             self.importedCookTime = importedCookTime
@@ -133,6 +129,10 @@ extension NewRecipeView {
             
             isImportingData = true
             
+            if !importedTitle.isEmpty && !importedIngredients.isEmpty && !importedSteps.isEmpty {
+                recipeFound = true
+            }
+
             if recipeFound {
                 let successMessage = MessageView.viewFromNib(layout: .cardView)
                 successMessage.configureTheme(.success)
@@ -150,6 +150,14 @@ extension NewRecipeView {
                 SwiftMessages.defaultConfig.duration = .seconds(seconds: 1)
                 SwiftMessages.show(view: noRecipeMessage)
             }
+        } else {
+            let noRecipeMessage = MessageView.viewFromNib(layout: .cardView)
+            noRecipeMessage.configureTheme(.warning)
+            noRecipeMessage.configureDropShadow()
+            noRecipeMessage.button?.isHidden = true
+            noRecipeMessage.configureContent(title: "No Recipe Found", body: "The clipboard is empty.")
+            SwiftMessages.defaultConfig.duration = .seconds(seconds: 1)
+            SwiftMessages.show(view: noRecipeMessage)
         }
     }
     

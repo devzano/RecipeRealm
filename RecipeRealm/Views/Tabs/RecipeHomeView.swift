@@ -12,8 +12,8 @@ import SafariServices
 import SwiftMessages
 
 struct RecipeHomeView: View {
-    @EnvironmentObject var appStates: AppStates
     @Environment(\.managedObjectContext) var viewContext
+    @ObservedObject var appStates = AppStates()
     @FetchRequest(
         entity: Recipe.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \Recipe.title, ascending: true)],
@@ -42,14 +42,10 @@ struct RecipeHomeView: View {
                     SearchBarView(placeholder: "search your recipes", text: $searchText)
                 }
                 
-                if self.appStates.isColorPickerVisible {
-                    CustomColorPicker(selectedAccentColor: $appStates.selectedAccentColor, isColorPickerVisible: $appStates.isColorPickerVisible)
-                }
-                
                 if appStates.isListView {
                     CombinedRecipeListView(
                         filteredRecipes: filteredRecipes,
-                        folders: folders,
+                        filteredRecipesInFolder: filteredRecipesInFolder, folders: folders,
                         deleteRecipes: { offsets in
                             self.deleteRecipes(offsets: offsets)
                         },
@@ -60,7 +56,7 @@ struct RecipeHomeView: View {
                 } else {
                     CombinedRecipeGridView(
                         filteredRecipes: filteredRecipes,
-                        folders: folders,
+                        filteredRecipesInFolder: filteredRecipesInFolder, folders: folders,
                         deleteRecipes: { offsets in
                             self.deleteRecipes(offsets: offsets)
                         },
@@ -111,26 +107,12 @@ struct RecipeHomeView: View {
                 }
             },trailing: HStack {
                 if !searchingGoogle {
-                    Menu {
-                        Button(action: {
-                            self.appStates.isColorPickerVisible.toggle()
-                        }) {
-                            Label("Change Tint Color", systemImage: "paintbrush")
-                        }
-                        Button(action: {
-                            appStates.isListView.toggle()
-                            UserDefaults.standard.set(appStates.isListView, forKey: selectedViewKey)
-                        }) {
-                            Label("Toggle View", systemImage: appStates.isListView ? "square.grid.2x2.fill" : "list.bullet")
-                        }
-                    } label: {
-                        Image(systemName: "gearshape")
-                    }
                     Button(action: {
                         showAddFolderPrompt()
                     }) {
                         Label("Create A Folder", systemImage: "folder.fill.badge.plus")
                     }
+                    
                     Button(action: {
                         showSearchBar.toggle()
                     }) {
@@ -181,7 +163,8 @@ struct RecipeHomeView_Previews: PreviewProvider {
         recipe.cookTime = "30m"
         return NavigationView {
             VStack{
-                RecipeHomeView().environmentObject(AppStates())
+                RecipeHomeView()
+                    .environmentObject(AppStates())
             }
         }.environment(\.managedObjectContext, context)
     }

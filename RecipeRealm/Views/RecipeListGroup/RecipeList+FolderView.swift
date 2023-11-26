@@ -11,12 +11,12 @@ import CoreData
 import UniformTypeIdentifiers
 
 struct CombinedRecipeListView: View {
-    @ObservedObject var appStates = AppStates()
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.sizeCategory) var sizeCategory
     @Environment(\.legibilityWeight) var legibilityWeight
-    
+    @ObservedObject var appStates = AppStates()
     var filteredRecipes: [Recipe]
+    var filteredRecipesInFolder: [Folder]
     var folders: FetchedResults<Folder>
     var deleteRecipes: (IndexSet) -> Void
     var shareRecipe: (Recipe) -> Void
@@ -31,7 +31,7 @@ struct CombinedRecipeListView: View {
             if !folders.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
-                        ForEach(folders, id: \.self) { folder in
+                        ForEach(filteredRecipesInFolder, id: \.self) { folder in
                             NavigationLink(destination: FolderRecipeListView(folder: folder)) {
                                 FolderListView(folderName: folder)
                             }
@@ -40,7 +40,7 @@ struct CombinedRecipeListView: View {
                                     deleteFolder(folder: folder)
                                 })
                             }
-                            .onDrop(of: [UTType.plainText.identifier], delegate: FolderDropDelegate(folder: folder, viewContext: viewContext))
+                            .onDrop(of: [UTType.plainText.identifier], delegate: FolderDrop(folder: folder, viewContext: viewContext))
                         }
                     }
                     .padding()

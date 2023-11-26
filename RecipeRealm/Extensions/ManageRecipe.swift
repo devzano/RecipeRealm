@@ -21,6 +21,49 @@ extension RecipeHomeView {
         }
     }
     
+    var combinedFilteredRecipes: [Recipe] {
+        return filteredRecipes + filteredRecipesInFolder.flatMap { $0.recipes?.allObjects as? [Recipe] ?? [] }
+    }
+    
+    var filteredRecipesInFolder: [Folder] {
+        if searchText.isEmpty {
+            return Array(folders)
+        } else {
+            let searchTextLowercased = searchText.lowercased()
+            
+            let filteredFoldersByName = folders.filter { folder in
+                if let folderName = folder.name?.lowercased(), folderName.contains(searchTextLowercased) {
+                    return true
+                }
+                return false
+            }
+            
+            let filteredFoldersByRecipe = folders.filter { folder in
+                if let recipes = folder.recipes as? Set<Recipe> {
+                    let matchingRecipes = recipes.filter { recipe in
+                        if let title = recipe.title?.lowercased(), title.contains(searchTextLowercased) {
+                            return true
+                        }
+                        if let cuisines = recipe.cuisines?.lowercased(), cuisines.contains(searchTextLowercased) {
+                            return true
+                        }
+                        if let prepTime = recipe.prepTime?.lowercased(), prepTime.contains(searchTextLowercased) {
+                            return true
+                        }
+                        if let cookTime = recipe.cookTime?.lowercased(), cookTime.contains(searchTextLowercased) {
+                            return true
+                        }
+                        return false
+                    }
+                    return !matchingRecipes.isEmpty
+                }
+                return false
+            }
+            
+            return Array(Set(filteredFoldersByName + filteredFoldersByRecipe))
+        }
+    }
+    
     // MARK: Delete Recipe From List
     func deleteRecipes(offsets: IndexSet) {
         let confirmAlert = MessageView.viewFromNib(layout: .cardView)

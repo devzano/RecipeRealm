@@ -126,9 +126,9 @@ struct ImagePickerButton: View {
     
     var body: some View {
         Button(action: {
-            showSourcePicker = true
             requestPhotoLibraryAccess(photoLibraryAuthorizationStatus: $photoLibraryAuthorizationStatus)
             requestCameraAccess(cameraAuthorizationStatus: $cameraAuthorizationStatus)
+            showSourcePicker = true
         }) {
             HStack {
                 Image(systemName: "photo.on.rectangle")

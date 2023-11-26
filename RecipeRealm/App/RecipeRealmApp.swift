@@ -8,12 +8,24 @@
 import SwiftUI
 import GoogleMobileAds
 
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [
+            "9279d05aaca0f38b5740572b17ae0ace", //iPhone 15
+            "6ee504ee7750aea70ad6ef10a5ec09e5", //iPhone 12
+            "7d4ebd112238d3f9cdd89764347d8e48"  //iPad Air 2
+        ]
+        return true
+    }
+}
+
 @main
 struct RecipeRealmApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     let persistenceController = PersistenceController.shared
     @Environment(\.scenePhase) var scenePhase
-    @ObservedObject var appStates = AppStates()
+    @StateObject var appStates = AppStates()
 
     // MARK: RecipeRealm View
     var body: some Scene {
@@ -58,18 +70,5 @@ struct RecipeRealmApp: App {
         } else {
             UIPasteboard.general.string = clipboardString
         }
-    }
-}
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
-        //iPhone 15
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "9279d05aaca0f38b5740572b17ae0ace" ]
-        //iPhone 12
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "6ee504ee7750aea70ad6ef10a5ec09e5" ]
-        //iPad Air 2
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "7d4ebd112238d3f9cdd89764347d8e48" ]
-        return true
     }
 }

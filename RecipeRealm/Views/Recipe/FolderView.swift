@@ -65,7 +65,6 @@ struct FolderView: View {
 
 struct FolderRecipeListView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject var appStates: AppStates
     @ObservedObject var folder: Folder
     @State private var refreshRecipeID = UUID()
 
@@ -162,7 +161,7 @@ func showRecipeDeletedConfirmation() {
     let successMessage = MessageView.viewFromNib(layout: .cardView)
     successMessage.configureTheme(.success)
     successMessage.configureDropShadow()
-    successMessage.button?.setTitle("OK", for: .normal)
+    successMessage.button?.isHidden = true
     successMessage.buttonTapHandler = { _ in
         SwiftMessages.hide()
     }

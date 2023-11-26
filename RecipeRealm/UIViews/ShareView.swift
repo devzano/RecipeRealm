@@ -16,24 +16,24 @@ func generateRecipeDeepLink(recipe: Recipe) -> URL? {
     components.path = "/recipe"
     
     let nutritionBadgeNames = [
-        ("Gluten Free", recipe.glutenFree),
-        ("Sugar Free", recipe.sugarFree),
-        ("Dairy Free", recipe.dairyFree),
-        ("GMO Free", recipe.gmoFree),
-        ("Organic", recipe.organic),
-        ("Vegetarian", recipe.vegetarian),
-        ("Peanut Free", recipe.peanutFree),
-        ("Nut Free", recipe.nutFree),
-        ("Egg Free", recipe.eggFree),
-        ("No Trans Fat", recipe.noTransFat),
-        ("Corn Free", recipe.cornFree),
-        ("Soy Free", recipe.soyFree)
+        ("GLTNF", recipe.glutenFree),
+        ("SGF", recipe.sugarFree),
+        ("DARYF", recipe.dairyFree),
+        ("GMOF", recipe.gmoFree),
+        ("O", recipe.organic),
+        ("V", recipe.vegetarian),
+        ("PNTF", recipe.peanutFree),
+        ("NUTF", recipe.nutFree),
+        ("EGGF", recipe.eggFree),
+        ("NTF", recipe.noTransFat),
+        ("CRNF", recipe.cornFree),
+        ("SOYF", recipe.soyFree)
     ]
     
     var recipeProperties: [String: String] = [
-        "Title": recipe.title ?? "",
-        "Prep Time": recipe.prepTime ?? "",
-        "Cook Time": recipe.cookTime ?? "",
+        "T": recipe.title ?? "",
+        "PT": recipe.prepTime ?? "",
+        "CT": recipe.cookTime ?? "",
         "Cuisine": recipe.cuisines ?? "",
         "Ingredients": recipe.ingredients ?? "",
         "Steps": recipe.steps ?? "",
@@ -41,9 +41,9 @@ func generateRecipeDeepLink(recipe: Recipe) -> URL? {
         "URL": recipe.recipeURL ?? ""
     ]
     
-    if let imageData = recipe.imageData {
-        recipeProperties["Image"] = convertDataToBase64String(imageData)
-    }
+//    if let imageData = recipe.imageData {
+//        recipeProperties["Image"] = convertDataToBase64String(imageData)
+//    }
     
     for (nutritionBadgeName, nutritionBadgeSelected) in nutritionBadgeNames {
         let badgeStatus = nutritionBadgeSelected ? "Yes" : "No"
@@ -94,10 +94,10 @@ func shareRecipe(recipe: Recipe) {
     let url = recipe.recipeURL ?? ""
     
     var shareText = """
-    Title: \(title)
+    T: \(title)
+    PT: \(prepTime)
+    CT: \(cookTime)
     Cuisine: \(cuisines)
-    Prep Time: \(prepTime)
-    Cook Time: \(cookTime)
     
     Ingredients:
     \(ingredients)
@@ -114,18 +114,18 @@ func shareRecipe(recipe: Recipe) {
     """
     
     let nutritionBadgeNames = [
-        ("Gluten-Free", recipe.glutenFree),
-        ("Sugar-Free", recipe.sugarFree),
-        ("Dairy-Free", recipe.dairyFree),
-        ("GMO-Free", recipe.gmoFree),
-        ("Organic", recipe.organic),
-        ("Vegetarian", recipe.vegetarian),
-        ("Peanut Free", recipe.peanutFree),
-        ("Nut Free", recipe.nutFree),
-        ("Egg Free", recipe.eggFree),
-        ("No Trans Fat", recipe.noTransFat),
-        ("Corn Free", recipe.cornFree),
-        ("Soy Free", recipe.soyFree)
+        ("GLTNF", recipe.glutenFree),
+        ("SGF", recipe.sugarFree),
+        ("DARYF", recipe.dairyFree),
+        ("GMOF", recipe.gmoFree),
+        ("O", recipe.organic),
+        ("V", recipe.vegetarian),
+        ("PNTF", recipe.peanutFree),
+        ("NUTF", recipe.nutFree),
+        ("EGGF", recipe.eggFree),
+        ("NTF", recipe.noTransFat),
+        ("CRNF", recipe.cornFree),
+        ("SOYF", recipe.soyFree)
     ]
     
     for (nutritionBadgeName, nutritionBadgeSelected) in nutritionBadgeNames {

@@ -20,6 +20,12 @@ struct NewRecipeView: View {
     @Binding var selectedTab: Int
     @State var errorMessage = ""
     @State var selectedImage: UIImage?
+    @State var showImagePicker = false
+    @State var showSourcePicker = false
+    @State var showWebView: Bool = false
+    @State var showImageWebView = false
+    @State var isSearchingImage = false
+    @State var imageSource: ImageSource = .photoLibrary
     // MARK: Users Inputed Recipe
     @State var title = ""
     @State var prepTime = ""
@@ -53,7 +59,7 @@ struct NewRecipeView: View {
     @State var importedSteps = ""
     @State var importedNotes = ""
     @State var importedURL = ""
-    
+
     // MARK: New Recipe View
     var body: some View {
         Form {
@@ -70,8 +76,8 @@ struct NewRecipeView: View {
         }
         .accentColor(appStates.selectedAccentColor)
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $appStates.showImagePicker) {
-            ImagePickerSheetView(showImagePicker: $appStates.showImagePicker, selectedImage: $selectedImage, imageSource: $appStates.imageSource, photoLibraryAuthorizationStatus: $appStates.photoLibraryAuthorizationStatus, cameraAuthorizationStatus: $appStates.cameraAuthorizationStatus)
+        .sheet(isPresented: $showImagePicker) {
+            ImagePickerSheetView(showImagePicker: $showImagePicker, selectedImage: $selectedImage, imageSource: $imageSource, photoLibraryAuthorizationStatus: $appStates.photoLibraryAuthorizationStatus, cameraAuthorizationStatus: $appStates.cameraAuthorizationStatus)
         }
     }
     
@@ -164,10 +170,10 @@ struct NewRecipeView: View {
                         HStack {
                             TextField("Image Search", text: $appStates.imageSearch)
                                 .onChange(of: appStates.imageSearch) { _ in
-                                    appStates.isSearchingImage = true
+                                    isSearchingImage = true
                                 }
                             Button(action: {
-                                appStates.showWebView.toggle()
+                                showImageWebView.toggle()
                             }) {
                                 HStack {
                                     Text("Search With")
@@ -177,9 +183,8 @@ struct NewRecipeView: View {
                                         .font(.system(size: imageSize))
                                 }
                             }
-                            .buttonStyle(.borderless)
-                            .sheet(isPresented: $appStates.showWebView) {
-                                GoogleImageSearchView(isPresented: $appStates.showWebView, searchQuery: $appStates.imageSearch)
+                            .sheet(isPresented: $showImageWebView) {
+                                GoogleImageSearchView(isPresented: $showImageWebView, searchQuery: $appStates.imageSearch)
                             }
                         }
                     }
@@ -199,7 +204,7 @@ struct NewRecipeView: View {
                         .foregroundColor(.red)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     } else {
-                        ImagePickerButton(showSourcePicker: $appStates.showSourcePicker, showImagePicker: $appStates.showImagePicker, imageSource: $appStates.imageSource, photoLibraryAuthorizationStatus: $appStates.photoLibraryAuthorizationStatus, cameraAuthorizationStatus: $appStates.cameraAuthorizationStatus)
+                        ImagePickerButton(showSourcePicker: $showSourcePicker, showImagePicker: $showImagePicker, imageSource: $imageSource, photoLibraryAuthorizationStatus: $appStates.photoLibraryAuthorizationStatus, cameraAuthorizationStatus: $appStates.cameraAuthorizationStatus)
                     }
                 }
             }
@@ -309,7 +314,6 @@ struct NewRecipeView: View {
                     }
                     HStack(spacing: 8) {
                         Toggle("Dairy Free", isOn: isImportingData ? $importedDairyFree : $nutritionBadges.dairyFree)
-                        
                         Toggle("GMO Free", isOn: isImportingData ? $importedGMOFree : $nutritionBadges.gmoFree)
                     }
                     HStack(spacing: 8) {
@@ -471,6 +475,7 @@ struct NewRecipeView_Previews: PreviewProvider {
         return NavigationView {
             NewRecipeView(selectedTab: $selectedTab)
                 .environment(\.managedObjectContext, context)
+                .environmentObject(AppStates())
         }
     }
 }

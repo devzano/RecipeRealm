@@ -15,7 +15,7 @@ struct CustomColorPicker: View {
     @Binding var isColorPickerVisible: Bool
     
     var body: some View {
-        ColorPicker("Pick Your Color", selection: $selectedAccentColor)
+        ColorPicker("Set Your Color", selection: $selectedAccentColor)
             .padding()
             .onChange(of: selectedAccentColor) { newColor in
                 UserDefaults.standard.setColor(newColor, forKey: selectedAccentColorKey)

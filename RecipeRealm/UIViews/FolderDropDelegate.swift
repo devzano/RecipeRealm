@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 import Foundation
 import SwiftMessages
 
-struct FolderDropDelegate: DropDelegate {
+struct FolderDrop: DropDelegate {
     var folder: Folder
     var viewContext: NSManagedObjectContext
 

@@ -43,8 +43,6 @@ class AppStates: ObservableObject {
     @Published var showAlert = false
     // MARK: UIViews
     @Published var isColorPickerVisible = false
-    @Published var showWebView: Bool = false
-    @Published var isSearchingImage = false
     // MARK: DeepLink URL Handling
     @Published var deepNewRecipeView: Bool = false
     let appScheme = "RecipeRealm"

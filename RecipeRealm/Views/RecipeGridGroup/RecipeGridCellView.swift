@@ -11,9 +11,10 @@ import SwiftUI
 struct RecipeGridCellView: View {
     @ObservedObject var recipe: Recipe
     @Environment(\.sizeCategory) var sizeCategory
+    @ObservedObject var appStates = AppStates()
+    @State private var isShowingFolderPicker: Bool = false
     var deleteAction: () -> Void
     var shareAction: () -> Void
-    @State private var isShowingFolderPicker: Bool = false
 
     var body: some View {
         let baseSize: CGFloat = 19
@@ -103,6 +104,8 @@ struct RecipeGridCellView_Previews: PreviewProvider {
         recipe.cookTime = "30m"
         return NavigationView {
             RecipeGridCellView(recipe: recipe, deleteAction: {}, shareAction: {})
-        }.environment(\.managedObjectContext, context)
+                .environmentObject(AppStates())
+                .environment(\.managedObjectContext, context)
+        }
     }
 }

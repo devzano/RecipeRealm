@@ -55,11 +55,11 @@ struct ContextMenuView: View {
                 Button(action: shareAction) {
                     Label("Share Recipe", systemImage: "doc.on.doc")
                 }
-//                Button(action: {
-//                    deepShareRecipe(recipe: recipe!)
-//                }) {
-//                    Label("Share Recipe Link", systemImage: "link")
-//                }
+                Button(action: {
+                    deepShareRecipe(recipe: recipe!)
+                }) {
+                    Label("Share Recipe Link", systemImage: "link")
+                }
             }
             
             if let moveAction = moveToFolderAction, hasFolders() {

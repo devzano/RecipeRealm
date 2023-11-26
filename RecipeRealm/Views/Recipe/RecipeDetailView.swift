@@ -14,14 +14,20 @@ import SwiftMessages
 //if UIDevice.current.userInterfaceIdiom == .pad{}
 
 struct RecipeDetailView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @StateObject private var appStates = AppStates()
     let recipe: Recipe
+    @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject var appStates = AppStates()
     @State private var showTOCropViewController = false
     @State private var detailTapped: [Substring: Bool] = [:]
+    @State var imageSource: ImageSource = .photoLibrary
+    @State var selectedImage: UIImage?
+    @State var showWebView: Bool = false
+    @State var showImageWebView = false
+    @State var isSearchingImage = false
+    @State var showImagePicker = false
+    @State var showSourcePicker = false
     // MARK: Update Users Recipe
     @State private var editingMode = false
-    @State var selectedImage: UIImage?
     @State private var updatedTitle: String
     @State private var updatedImageData: Data?
     @State private var updatedPrepTime: String
@@ -123,8 +129,8 @@ struct RecipeDetailView: View {
                     }
                 }
             }
-            .sheet(isPresented: $appStates.showImagePicker) {
-                ImagePickerSheetView(showImagePicker: $appStates.showImagePicker, selectedImage: $selectedImage, imageSource: $appStates.imageSource, photoLibraryAuthorizationStatus: $appStates.photoLibraryAuthorizationStatus, cameraAuthorizationStatus: $appStates.cameraAuthorizationStatus)
+            .sheet(isPresented: $showImagePicker) {
+                ImagePickerSheetView(showImagePicker: $showImagePicker, selectedImage: $selectedImage, imageSource: $imageSource, photoLibraryAuthorizationStatus: $appStates.photoLibraryAuthorizationStatus, cameraAuthorizationStatus: $appStates.cameraAuthorizationStatus)
             }
             .navigationTitle("Recipe Details")
             .navigationBarTitleDisplayMode(.inline)
@@ -143,25 +149,16 @@ struct RecipeDetailView: View {
     
     // MARK: iPad Section
     private var iPadSection: some View {
-        Section(header: SectionHeaderTitlesView(title: "")) {
-            Group {
-                HStack {
-                    if let image = selectedImage {
-                        HStack {
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 450, maxHeight: 450)
-                        }
-                    } else if !editingMode {
-                        Text("Present a picture of your recipe!")
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                    }
-                    
-                    VStack {
-                        prepAndCookTimeSection
-                        nutritionAndCuisineSection
-                    }
+        VStack {
+            HStack {
+                if let image = selectedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                } else if !editingMode {
+                    Text("Present a picture of your recipe!")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 }
                 
                 if editingMode {
@@ -169,10 +166,10 @@ struct RecipeDetailView: View {
                         HStack {
                             TextField("Image Search", text: $appStates.imageSearch)
                                 .onChange(of: appStates.imageSearch) { _ in
-                                    appStates.isSearchingImage = true
+                                    isSearchingImage = true
                                 }
                             Button(action: {
-                                appStates.showWebView.toggle()
+                                showWebView.toggle()
                             }) {
                                 HStack {
                                     Text("Search With")
@@ -182,33 +179,116 @@ struct RecipeDetailView: View {
                                 }
                             }
                             .buttonStyle(.borderless)
-                            .sheet(isPresented: $appStates.showWebView) {
-                                GoogleImageSearchView(isPresented: $appStates.showWebView, searchQuery: $appStates.imageSearch)
+                            .sheet(isPresented: $showWebView) {
+                                GoogleImageSearchView(isPresented: $showWebView, searchQuery: $appStates.imageSearch)
                             }
                         }.listRowSeparator(.hidden)
                     }
                     
-                    HStack {
+                    VStack {
                         if selectedImage == nil {
-                            ImagePickerButton(showSourcePicker: $appStates.showSourcePicker, showImagePicker: $appStates.showImagePicker, imageSource: $appStates.imageSource, photoLibraryAuthorizationStatus: $appStates.photoLibraryAuthorizationStatus, cameraAuthorizationStatus: $appStates.cameraAuthorizationStatus)
-                        }
-                        
-                        if editingMode && selectedImage != nil {
-                            TOCropImageView(selectedImage: $selectedImage)
-                            
-                            HStack {
-                                Image(systemName: "trash")
-                                Text("Delete Photo")
-                            }
-                            .onTapGesture {
-                                deletePhoto()
-                            }
-                            .foregroundColor(.red)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                            ImagePickerButton(showSourcePicker: $showSourcePicker, showImagePicker: $showImagePicker, imageSource: $imageSource, photoLibraryAuthorizationStatus: $appStates.photoLibraryAuthorizationStatus, cameraAuthorizationStatus: $appStates.cameraAuthorizationStatus)
                         }
                     }
                 }
-            }
+                
+                VStack {
+                    TOCropImageView(selectedImage: $selectedImage).buttonStyle(.borderless)
+                    
+                    Button(action: {
+                        deletePhoto()
+                    }) {
+                        HStack {
+                            Image(systemName: "trash")
+                            Text("Delete Photo")
+                        }
+                        .foregroundColor(.red)
+                    }.buttonStyle(.borderless)
+                    
+                    Spacer(minLength: 90)
+                }
+                
+                VStack {
+                    VStack {
+                        Section(header: SectionHeaderTitlesView(title: prepAndCookTimeHeader)) {
+                            HStack {
+                                if !updatedPrepTime.isEmpty {
+                                    HStack {
+                                        Image(systemName: "hands.sparkles.fill")
+                                            .resizable()
+                                            .frame(width: 35, height: 35)
+                                            .foregroundColor(.orange)
+                                        Text(updatedPrepTime)
+                                            .foregroundColor(.primary)
+                                    }
+                                }
+                                
+                                Spacer()
+                                
+                                if !updatedCookTime.isEmpty {
+                                    HStack {
+                                        Image(systemName: "flame.fill")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .foregroundColor(.red)
+                                        Text(updatedCookTime)
+                                            .foregroundColor(.primary)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Section(header: SectionHeaderTitlesView(title: nutritionHeader)) {
+                            VStack {
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack {
+                                        if glutenFree {
+                                            nutritionBadgeImg("GlutenFree")
+                                        }
+                                        if sugarFree {
+                                            nutritionBadgeImg("SugarFree")
+                                        }
+                                        if dairyFree {
+                                            nutritionBadgeImg("DairyFree")
+                                        }
+                                        if gmoFree {
+                                            nutritionBadgeImg("GMOFree")
+                                        }
+                                        if organic {
+                                            nutritionBadgeImg("Organic")
+                                        }
+                                        if vegetarian {
+                                            nutritionBadgeImg("Vegetarian")
+                                        }
+                                        if peanutFree{
+                                            nutritionBadgeImg("PeanutFree")
+                                        }
+                                        if nutFree {
+                                            nutritionBadgeImg("NutFree")
+                                        }
+                                        if eggFree {
+                                            nutritionBadgeImg("EggFree")
+                                        }
+                                        if noTransFat{
+                                            nutritionBadgeImg("NoTransFat")
+                                        }
+                                        if cornFree {
+                                            nutritionBadgeImg("CornFree")
+                                        }
+                                        if soyFree {
+                                            nutritionBadgeImg("SoyFree")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }.frame(maxHeight: 400)
         }
     }
     
@@ -237,10 +317,10 @@ struct RecipeDetailView: View {
                             HStack {
                                 TextField("Image Search", text: $appStates.imageSearch)
                                     .onChange(of: appStates.imageSearch) { _ in
-                                        appStates.isSearchingImage = true
+                                        isSearchingImage = true
                                     }
                                 Button(action: {
-                                    appStates.showWebView.toggle()
+                                    showWebView.toggle()
                                 }) {
                                     HStack {
                                         Text("Search With")
@@ -250,15 +330,15 @@ struct RecipeDetailView: View {
                                     }
                                 }
                                 .buttonStyle(.borderless)
-                                .sheet(isPresented: $appStates.showWebView) {
-                                    GoogleImageSearchView(isPresented: $appStates.showWebView, searchQuery: $appStates.imageSearch)
+                                .sheet(isPresented: $showWebView) {
+                                    GoogleImageSearchView(isPresented: $showWebView, searchQuery: $appStates.imageSearch)
                                 }
                             }.listRowSeparator(.hidden)
                         }
                         
                 HStack {
                     if selectedImage == nil {
-                        ImagePickerButton(showSourcePicker: $appStates.showSourcePicker, showImagePicker: $appStates.showImagePicker, imageSource: $appStates.imageSource, photoLibraryAuthorizationStatus: $appStates.photoLibraryAuthorizationStatus, cameraAuthorizationStatus: $appStates.cameraAuthorizationStatus)
+                        ImagePickerButton(showSourcePicker: $showSourcePicker, showImagePicker: $showImagePicker, imageSource: $imageSource, photoLibraryAuthorizationStatus: $appStates.photoLibraryAuthorizationStatus, cameraAuthorizationStatus: $appStates.cameraAuthorizationStatus)
                     }
                     
                     if editingMode && selectedImage != nil {
@@ -697,6 +777,9 @@ struct RecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.preview.container.viewContext
         let recipe = Recipe(context: context)
+        if let sampleImage = UIImage(named: "CarnitasTacos") {
+            recipe.imageData = sampleImage.jpegData(compressionQuality: 1.0)
+        }
         recipe.title = "Sample Recipe"
         recipe.cuisines = "Mexican"
         recipe.glutenFree = true
@@ -710,6 +793,7 @@ struct RecipeDetailView_Previews: PreviewProvider {
         return NavigationView {
             RecipeDetailView(recipe: recipe)
         }
+        .environmentObject(AppStates())
         .environment(\.managedObjectContext, context)
         .navigationViewStyle(StackNavigationViewStyle())
     }
